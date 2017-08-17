@@ -1,0 +1,28 @@
+return的用法？难道lz问的是返回值的规则
+1.可以在具有对象引用返回类型的方法中返回null
+public Button doStuff（）{
+return null；
+}
+2.数组是完全合法的返回类型
+public String[] go(){
+return new String[]{"wangsan","wangsan","wangsi"};
+}
+3.在具有基本返回类型的方法内，可以返回任何值或变量，只要他们可以隐式转换成所声明的返回类型
+public int foo(){
+char c=‘c’;
+return c;//char可以转化成int 
+}
+4.在具有基本返回类型的方法内，可以返回任何值或变量，只要他们可以显示强制转换成所声明的返回类型（这个不举例子了）
+5.一定不能从返回类型为void的方法返回任何值（^_^），当然可以用return中断程序。
+public void bar(int a){
+//负数则中断操作，
+if(a<0){
+return;
+}
+
+//do other things
+}
+6.在具有对象引用返回类型的方法内，可以返回任何值或变量，只要他们可以隐式转换成所声明的返回类型（通过is-a测试即可）
+public Animal getAnimal(){
+return new Dog();//只要Dog继承Animal即可
+}

@@ -1,0 +1,4 @@
+
+1、HashTable线程安全，性能相对低；HashMap线程不安全，性能相对高，并发操作时最好使用concurrent包下的ConcurrentHashMap
+
+2、HashMap允许key和value为null

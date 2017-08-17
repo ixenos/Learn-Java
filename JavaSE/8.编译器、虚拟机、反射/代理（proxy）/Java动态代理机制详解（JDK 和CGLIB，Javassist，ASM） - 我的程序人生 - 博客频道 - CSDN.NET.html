@@ -1,0 +1,2038 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>   
+   
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+    <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM） - 我的程序人生
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="RecyclerView中ViewHolder重用机制理解(解决图片错乱和闪烁问题)对于使用ViewHolder引起的图片错乱问题，相信大部分人都有遇到过，我也一样，对于解决方法也有所了解，但一直都是知其然不知其所以然。所以，这次直接把ViewHolder的工作原理，通过简单的demo代码来验证一次，验证后对于图片错乱和闪烁这种问题的成因就很清楚了。" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+      <script type="text/javascript" src="http://static.blog.csdn.net/scripts/jquery-version.js"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/u010349169/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/blue.css" />
+ 
+
+
+</head>
+<body>
+    <!-- 广告位开始 -->
+        <ins data-revive-zoneid="149" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/luanlouis">我的程序人生</a></h2>
+            <h3>Software Engineer, The Artist of Simulating the World.</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            
+                <li id="btnContents"><a href="http://blog.csdn.net/luanlouis?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/luanlouis?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/luanlouis/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "u010349169";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/luanlouis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://bbs.csdn.net/topics/391976908">
+<font color=blue>【CSDN会员专属福利】OpenStack Days China 大会门票，先到先得</font></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://lib.csdn.net/base/swift/resource">
+<font color=red>【知识库】Swift资源大集合
+</font></a>
+&nbsp;&nbsp;&nbsp;
+
+</font></a>
+</div>                        </div>
+                        
+
+
+
+<!-- 广告位开始 -->
+<ins data-revive-zoneid="72" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<!-- 广告位结束 -->
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+<link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0" />
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/web-storage-cache.min.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/replace.min.js"></script>
+
+
+
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+          
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/luanlouis/article/details/24589193">
+        Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/Java%20%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Java 设计模式</a><a href='http://www.csdn.net/tag/%e4%bb%a3%e7%90%86%e6%a8%a1%e5%bc%8f' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">代理模式</a><a href='http://www.csdn.net/tag/Javassist' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Javassist</a><a href='http://www.csdn.net/tag/ASM' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">ASM</a><a href='http://www.csdn.net/tag/%e5%8a%a8%e6%80%81%e4%bb%a3%e7%90%86' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">动态代理</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2014-06-03 15:48</span>
+            <span class="link_view" title="阅读次数">10016人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(14)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）','24589193');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(24589193,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('1855931','u010349169','top','24589193');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Java fundamentals<em>（8）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/u010349169/article/category/1855931"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_1855931">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+    <script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>  
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+<div id="article_content" class="article_content">
+
+<h3 style="background-color:rgb(166,255,153)">class文件简介及加载</h3>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-size:12px">&nbsp; Java编译器编译好Java文件之后，产生.class 文件在磁盘中。这种class文件是二进制文件，内容是只有JVM虚拟机能够识别的机器码。JVM虚拟机读取字节码文件，取出二进制数据，加载到内存中，解析.class 文件内的信息，生成对应的 Class对象:</span></p>
+</blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140427155129031" alt=""></p>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size:12px">class字节码文件是根据JVM虚拟机规范中规定的字节码组织规则生成的、具体class文件是怎样组织类信息的，可以参考 此博文：<u><span style="color:#E36C0A"><a target="_blank" target="_blank" href="http://blog.csdn.net/zhangjg_blog/article/details/21486985"><span style="color:#E36C0A">深入理解Java
+ Class</span></a></span><span style="color:#E36C0A">文件&#26684;式</span><span style="color:#E36C0A">系列。</span></u>或者是<span style="color:#E36C0A"><a target="_blank" target="_blank" href="http://download.csdn.net/detail/u010349169/7439669"><span style="color:#E36C0A">Java</span><span style="color:#E36C0A">虚拟机规范</span></a></span>。<strong><br>
+</strong></span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp; 下面通过一段代码演示手动加载 class文件字节码到系统内，转换成class对象，然后再实例化的过程：</span></p>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;<span style="font-size:12px">&nbsp; <strong>a. 定义一个 Programmer类：</strong></span></p>
+</blockquote>
+<p></p>
+<blockquote>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_19_525913"  code_snippet_id="374446" snippet_file_name="blog_20140603_19_525913" name="code" class="java">package samples;
+/**
+ * 程序猿类
+ * @author louluan
+ */
+public class Programmer {
+
+	public void code()
+	{
+		System.out.println(&quot;I&#39;m a Programmer,Just Coding.....&quot;);
+	}
+}
+</pre></blockquote>
+</blockquote>
+<blockquote>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="font-size:12px"> b. 自定义一个类加载器：</span></strong></blockquote>
+<p></p>
+<p></p>
+<blockquote>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_2_4465528"  code_snippet_id="374446" snippet_file_name="blog_20140603_2_4465528" name="code" class="java">package samples;
+/**
+ * 自定义一个类加载器，用于将字节码转换为class对象
+ * @author louluan
+ */
+public class MyClassLoader extends ClassLoader {
+
+	public Class&lt;?&gt; defineMyClass( byte[] b, int off, int len) 
+	{
+		return super.defineClass(b, off, len);
+	}
+	
+}
+</pre></blockquote>
+</blockquote>
+<blockquote>&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size:12px"><strong>c. 然后编译成Programmer.class文件，在程序中读取字节码，然后转换成相应的class对象，再实例化：</strong></span></blockquote>
+<p></p>
+<p></p>
+<blockquote>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_3_6624336"  code_snippet_id="374446" snippet_file_name="blog_20140603_3_6624336" name="code" class="java">package samples;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+public class MyTest {
+
+	public static void main(String[] args) throws IOException {
+		//读取本地的class文件内的字节码，转换成字节码数组
+		File file = new File(&quot;.&quot;);
+		InputStream  input = new FileInputStream(file.getCanonicalPath()+&quot;\\bin\\samples\\Programmer.class&quot;);
+		byte[] result = new byte[1024];
+		
+		int count = input.read(result);
+		// 使用自定义的类加载器将 byte字节码数组转换为对应的class对象
+		MyClassLoader loader = new MyClassLoader();
+		Class clazz = loader.defineMyClass( result, 0, count);
+		//测试加载是否成功，打印class 对象的名称
+		System.out.println(clazz.getCanonicalName());
+                
+               //实例化一个Programmer对象
+&#160;&#160; &#160;&#160;&#160; &#160;       Object o= clazz.newInstance();
+&#160;&#160; &#160;&#160;&#160; &#160;       try {
+&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;       //调用Programmer的code方法
+&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;        clazz.getMethod(&quot;code&quot;, null).invoke(o, null);
+&#160;&#160; &#160;&#160;&#160; &#160;           } catch (IllegalArgumentException | InvocationTargetException
+&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;        | NoSuchMethodException | SecurityException e) {
+&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; &#160;         e.printStackTrace();
+&#160;&#160; &#160;&#160;&#160; &#160;          }
+&#160;}
+}
+</pre></blockquote>
+</blockquote>
+<blockquote>&nbsp;&nbsp;<span style="font-size:12px">&nbsp; 以上代码演示了，通过字节码加载成class 对象的能力，下面看一下在代码中如何生成class文件的字节码。</span><br>
+</blockquote>
+<br>
+<p></p>
+<h3 style="background-color:rgb(166,255,153)"><strong><strong>在运行期的代码中生成二进制字节码</strong></strong></h3>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;由于JVM通过字节码的二进制信息加载类的，那么，如果我们在运行期系统中，遵循Java编译系统组织.class文件的&#26684;式和结构，生成相应的二进制数据，然后再把这个二进制数据加载转换成对应的类，这样，就完成了在代码中，动态创建一个类的能力了。</p>
+</blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140427160344203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+<p><br>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px">&nbsp;</span></p>
+<blockquote>
+<p align="left"><span style="font-size:12px">在运行时期可以按照Java虚拟机规范对class文件的组织规则生成对应的二进制字节码。当前有很多开源框架可以完成这些功能，如ASM，Javassist。</span></p>
+</blockquote>
+<h3 style="background-color:rgb(166,255,153)"><span style="font-size:12px"></span>
+<p align="left"><strong>Java字节码生成开源框架介绍--ASM：</strong></p>
+</h3>
+<p><span style="font-size:12px"></span></p>
+<blockquote>
+<p align="left"><span style="font-size:12px">ASM 是一个 Java 字节码操控框架。它能够以二进制形式修改已有类或者动态生成类。ASM 可以直接产生二进制 class 文件，也可以在类被加载入 Java 虚拟机之前动态改变类行为。ASM 从类文件中读入信息后，能够改变类行为，分析类信息，甚至能够根据用户要求生成新类。</span></p>
+</blockquote>
+<blockquote>
+<p align="left"><span style="font-size:12px; color:#FF6600"><strong>不过ASM在创建class字节码的过程中，操纵的级别是底层JVM的汇编指令级别，这要求ASM使用者要对class组织结构和JVM汇编指令有一定的了解。</strong></span></p>
+</blockquote>
+<blockquote><span style="font-size:12px">下面通过ASM 生成下面类Programmer的class字节码：</span></blockquote>
+<p></p>
+<blockquote>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_4_2022530"  code_snippet_id="374446" snippet_file_name="blog_20140603_4_2022530" name="code" class="java">package com.samples;
+import java.io.PrintStream;
+
+public class Programmer {
+
+	public void code()
+	{
+		System.out.println(&quot;I&#39;m a Programmer,Just Coding.....&quot;);
+	}
+}</pre></blockquote>
+</blockquote>
+<br>
+<blockquote>&nbsp;&nbsp;&nbsp;<span style="font-size:12px"> 使用ASM框架提供了ClassWriter 接口，通过访问者模式进行动态创建class字节码，看下面的例子：</span></blockquote>
+<p></p>
+<blockquote>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_5_2752878"  code_snippet_id="374446" snippet_file_name="blog_20140603_5_2752878" name="code" class="java">package samples;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+public class MyGenerator {
+
+	public static void main(String[] args) throws IOException {
+
+		System.out.println();
+		ClassWriter classWriter = new ClassWriter(0);
+		// 通过visit方法确定类的头部信息
+		classWriter.visit(Opcodes.V1_7,// java版本
+				Opcodes.ACC_PUBLIC,// 类修饰符
+				&quot;Programmer&quot;, // 类的全限定名
+				null, &quot;java/lang/Object&quot;, null);
+		
+		//创建构造函数
+		MethodVisitor mv = classWriter.visitMethod(Opcodes.ACC_PUBLIC, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, null, null);
+		mv.visitCode();
+		mv.visitVarInsn(Opcodes.ALOAD, 0);
+		mv.visitMethodInsn(Opcodes.INVOKESPECIAL, &quot;java/lang/Object&quot;, &quot;&lt;init&gt;&quot;,&quot;()V&quot;);
+		mv.visitInsn(Opcodes.RETURN);
+		mv.visitMaxs(1, 1);
+		mv.visitEnd();
+		
+		// 定义code方法
+		MethodVisitor methodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC, &quot;code&quot;, &quot;()V&quot;,
+				null, null);
+		methodVisitor.visitCode();
+		methodVisitor.visitFieldInsn(Opcodes.GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,
+				&quot;Ljava/io/PrintStream;&quot;);
+		methodVisitor.visitLdcInsn(&quot;I&#39;m a Programmer,Just Coding.....&quot;);
+		methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, &quot;java/io/PrintStream&quot;, &quot;println&quot;,
+				&quot;(Ljava/lang/String;)V&quot;);
+		methodVisitor.visitInsn(Opcodes.RETURN);
+		methodVisitor.visitMaxs(2, 2);
+		methodVisitor.visitEnd();
+		classWriter.visitEnd(); 
+		// 使classWriter类已经完成
+		// 将classWriter转换成字节数组写到文件里面去
+		byte[] data = classWriter.toByteArray();
+		File file = new File(&quot;D://Programmer.class&quot;);
+		FileOutputStream fout = new FileOutputStream(file);
+		fout.write(data);
+		fout.close();
+	}
+}
+</pre></blockquote>
+</blockquote>
+<blockquote>&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size:12px">上述的代码执行过后，用Java反编译工具（如JD_GUI）打开D盘下生成的Programmer.class，可以看到以下信息：</span></blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140526151026921?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px"> 再用上面我们定义的类加载器将这个class文件加载到内存中，然后 创建class对象，并且实例化一个对象，调用code方法，会看到下面的结果：</span></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140526153538656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp; <span style="font-size:12px">以上表明：在代码里生成字节码，并动态地加载成class对象、创建实例是完全可以实现的。</span><br>
+</p>
+</blockquote>
+<h3 style="background-color:rgb(166,255,153)"><span style="font-size:12px"><strong>Java字节码生成开源框架介绍--Javassist：</strong></span></h3>
+<blockquote>
+<p><span style="font-size:12px">Javassist是一个开源的分析、编辑和创建Java字节码的类库。是由东京工业大学的数学和计算机科学系的 Shigeru Chiba （千叶 滋）所创建的。它已加入了开放源代码JBoss 应用服务器项目,通过使用Javassist对字节码操作为JBoss实现动态AOP框架。javassist是<a target="_blank" target="_blank" href="http://baike.baidu.com/view/309533.htm"><span style="color:windowtext">jboss</span></a>的一个子项目，其主要的优点，在于简单，而且快速。直接使用java编码的形式，而不需要了解<a target="_blank" target="_blank" href="http://baike.baidu.com/view/1132.htm"><span style="color:windowtext">虚拟机</span></a>指令，就能动态改变类的结构，或者动态生成类。</span></p>
+<p><span style="font-size:12px">下面通过Javassist创建上述的Programmer类：</span></p>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_6_1913063"  code_snippet_id="374446" snippet_file_name="blog_20140603_6_1913063" name="code" class="java">import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.CtNewMethod;
+
+public class MyGenerator {
+
+	public static void main(String[] args) throws Exception {
+		ClassPool pool = ClassPool.getDefault();
+        //创建Programmer类		
+		CtClass cc= pool.makeClass(&quot;com.samples.Programmer&quot;);
+		//定义code方法
+		CtMethod method = CtNewMethod.make(&quot;public void code(){}&quot;, cc);
+		//插入方法代码
+		method.insertBefore(&quot;System.out.println(\&quot;I&#39;m a Programmer,Just Coding.....\&quot;);&quot;);
+		cc.addMethod(method);
+		//保存生成的字节码
+		cc.writeFile(&quot;d://temp&quot;);
+	}
+}
+</pre></blockquote>
+<span style="font-size:12px">通过JD-gui反编译工具打开Programmer.class 可以看到以下代码：</span>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140603142035000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDM0OTE2OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+</blockquote>
+</blockquote>
+<p><br>
+</p>
+<h3 style="background-color:rgb(166,255,153)">代理的基本构成：</h3>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:12px">&nbsp; 代理模式上，基本上有Subject角色，RealSubject角色，Proxy角色。其中：Subject角色负责定义RealSubject和Proxy角色应该实现的接口；RealSubject角色用来真正完成业务服务功能；Proxy角色负责将自身的Request请求，调用realsubject 对应的request功能来实现业务功能，自己不真正做业务。</span><br>
+</p>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140526164603234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+</span></p>
+</blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上面的这幅代理结构图是典型的静态的代理模式：</span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#CC0000"> <strong>当在代码阶段规定这种代理关系，Proxy类通过编译器编译成class文件，当系统运行时，此class已经存在了。这种静态的代理模式固然在访问无法访问的资源，增强现有的接口业务功能方面有很大的优点，但是大量使用这种静态代理，会使我们系统内的类的规模增大，并且不易维护；并且由于Proxy和RealSubject的功能 本质上是相同的，Proxy只是起到了中介的作用，这种代理在系统中的存在，导致系统结构比较臃肿和松散。</strong></span></span></p>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了解决这个问题，就有了动态地创建Proxy的想法：在运行状态中，需要代理的地方，根据Subject 和RealSubject，动态地创建一个Proxy，用完之后，就会销毁，这样就可以避免了Proxy 角色的class在系统中冗杂的问题了。</span></p>
+<p><span style="font-size:12px">下面以一个代理模式实例阐述这一问题：</span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp; 将车站的售票服务抽象出一个接口TicketService,包含问询，卖票，退票功能，车站类Station实现了TicketService接口，车票代售点StationProxy则实现了代理角色的功能，类图如下所示。</span></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140603143054500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDM0OTE2OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px">对应的静态的代理模式代码如下所示：</span></p>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_7_1563616"  code_snippet_id="374446" snippet_file_name="blog_20140603_7_1563616" name="code" class="java">package com.foo.proxy;
+
+/**
+ * 售票服务接口实现类，车站
+ * @author louluan
+ */
+public class Station implements TicketService {
+
+	@Override
+	public void sellTicket() {
+		System.out.println(&quot;\n\t售票.....\n&quot;);
+	}
+
+	@Override
+	public void inquire() {
+        System.out.println(&quot;\n\t问询。。。。\n&quot;);
+	}
+
+	@Override
+	public void withdraw() {
+        System.out.println(&quot;\n\t退票......\n&quot;);
+	}
+
+}
+</pre></blockquote>
+<br>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_8_4486574"  code_snippet_id="374446" snippet_file_name="blog_20140603_8_4486574" name="code" class="java">package com.foo.proxy;
+/**
+ * 售票服务接口 
+ * @author louluan
+ */
+public interface TicketService {
+
+	//售票
+	public void sellTicket();
+	
+	//问询
+	public void inquire();
+	
+	//退票
+	public void withdraw();
+	
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_9_9710044"  code_snippet_id="374446" snippet_file_name="blog_20140603_9_9710044" name="code" class="java">package com.foo.proxy;
+
+/**
+ * 车票代售点
+ * @author louluan
+ *
+ */
+public class StationProxy implements TicketService {
+
+	private Station station;
+
+	public StationProxy(Station station){
+		this.station = station;
+	}
+	
+	@Override
+	public void sellTicket() {
+
+		// 1.做真正业务前，提示信息
+		this.showAlertInfo(&quot;&#215;&#215;&#215;&#215;您正在使用车票代售点进行购票，每张票将会收取5元手续费！&#215;&#215;&#215;&#215;&quot;);
+		// 2.调用真实业务逻辑
+		station.sellTicket();
+		// 3.后处理
+		this.takeHandlingFee();
+		this.showAlertInfo(&quot;&#215;&#215;&#215;&#215;欢迎您的光临，再见！&#215;&#215;&#215;&#215;\n&quot;);
+
+	}
+
+	@Override
+	public void inquire() {
+		// 1做真正业务前，提示信息
+		this.showAlertInfo(&quot;&#215;&#215;&#215;&#215;欢迎光临本代售点，问询服务不会收取任何费用，本问询信息仅供参考，具体信息以车站真实数据为准！&#215;&#215;&#215;&#215;&quot;);
+		// 2.调用真实逻辑
+		station.inquire();
+		// 3。后处理
+		this.showAlertInfo(&quot;&#215;&#215;&#215;&#215;欢迎您的光临，再见！&#215;&#215;&#215;&#215;\n&quot;);
+	}
+
+	@Override
+	public void withdraw() {
+		// 1。真正业务前处理
+		this.showAlertInfo(&quot;&#215;&#215;&#215;&#215;欢迎光临本代售点，退票除了扣除票额的20%外，本代理处额外加收2元手续费！&#215;&#215;&#215;&#215;&quot;);
+		// 2.调用真正业务逻辑
+		station.withdraw();
+		// 3.后处理
+		this.takeHandlingFee();
+
+	}
+
+	/*
+	 * 展示额外信息
+	 */
+	private void showAlertInfo(String info) {
+		System.out.println(info);
+	}
+
+	/*
+	 * 收取手续费
+	 */
+	private void takeHandlingFee() {
+		System.out.println(&quot;收取手续费，打印发票。。。。。\n&quot;);
+	}
+
+}
+</pre></blockquote>
+<br>
+<span style="font-size:12px">由于我们现在不希望静态地有StationProxy类存在，希望在代码中，动态生成器二进制代码，加载进来。为此，使用Javassist开源框架，在代码中动态地生成StationProxy的字节码：</span>
+<blockquote><pre code_snippet_id="374446" snippet_file_name="blog_20140603_10_6885362"  code_snippet_id="374446" snippet_file_name="blog_20140603_10_6885362" name="code" class="java">package com.foo.proxy;
+
+
+import java.lang.reflect.Constructor;
+
+import javassist.*;
+public class Test {
+
+    public static void main(String[] args) throws Exception {
+       createProxy();
+    }
+    
+    /*
+     * 手动创建字节码
+     */
+    private static void createProxy() throws Exception
+    {
+    	ClassPool pool = ClassPool.getDefault();
+
+    	CtClass cc = pool.makeClass(&quot;com.foo.proxy.StationProxy&quot;);
+    	
+    	//设置接口
+    	CtClass interface1 = pool.get(&quot;com.foo.proxy.TicketService&quot;);
+    	cc.setInterfaces(new CtClass[]{interface1});
+    	
+    	//设置Field
+    	CtField field = CtField.make(&quot;private com.foo.proxy.Station station;&quot;, cc);
+    	
+    	cc.addField(field);
+    	
+    	CtClass stationClass = pool.get(&quot;com.foo.proxy.Station&quot;);
+    	CtClass[] arrays = new CtClass[]{stationClass};
+    	CtConstructor ctc = CtNewConstructor.make(arrays,null,CtNewConstructor.PASS_NONE,null,null, cc);
+    	//设置构造函数内部信息
+    	ctc.setBody(&quot;{this.station=$1;}&quot;);
+    	cc.addConstructor(ctc);
+
+    	//创建收取手续 takeHandlingFee方法
+    	CtMethod takeHandlingFee = CtMethod.make(&quot;private void takeHandlingFee() {}&quot;, cc);
+    	takeHandlingFee.setBody(&quot;System.out.println(\&quot;收取手续费，打印发票。。。。。\&quot;);&quot;);
+    	cc.addMethod(takeHandlingFee);
+    	
+    	//创建showAlertInfo 方法
+    	CtMethod showInfo = CtMethod.make(&quot;private void showAlertInfo(String info) {}&quot;, cc);
+    	showInfo.setBody(&quot;System.out.println($1);&quot;);
+    	cc.addMethod(showInfo);
+    	
+    	//sellTicket
+    	CtMethod sellTicket = CtMethod.make(&quot;public void sellTicket(){}&quot;, cc);
+    	sellTicket.setBody(&quot;{this.showAlertInfo(\&quot;&#215;&#215;&#215;&#215;您正在使用车票代售点进行购票，每张票将会收取5元手续费！&#215;&#215;&#215;&#215;\&quot;);&quot;
+    			+ &quot;station.sellTicket();&quot;
+    			+ &quot;this.takeHandlingFee();&quot;
+    			+ &quot;this.showAlertInfo(\&quot;&#215;&#215;&#215;&#215;欢迎您的光临，再见！&#215;&#215;&#215;&#215;\&quot;);}&quot;);
+    	cc.addMethod(sellTicket);
+    	
+    	//添加inquire方法
+    	CtMethod inquire = CtMethod.make(&quot;public void inquire() {}&quot;, cc);
+    	inquire.setBody(&quot;{this.showAlertInfo(\&quot;&#215;&#215;&#215;&#215;欢迎光临本代售点，问询服务不会收取任何费用，本问询信息仅供参考，具体信息以车站真实数据为准！&#215;&#215;&#215;&#215;\&quot;);&quot;
+    	+ &quot;station.inquire();&quot;
+    	+ &quot;this.showAlertInfo(\&quot;&#215;&#215;&#215;&#215;欢迎您的光临，再见！&#215;&#215;&#215;&#215;\&quot;);}&quot;
+    	);
+    	cc.addMethod(inquire);
+    	
+    	//添加widthraw方法
+    	CtMethod withdraw = CtMethod.make(&quot;public void withdraw() {}&quot;, cc);
+    	withdraw.setBody(&quot;{this.showAlertInfo(\&quot;&#215;&#215;&#215;&#215;欢迎光临本代售点，退票除了扣除票额的20%外，本代理处额外加收2元手续费！&#215;&#215;&#215;&#215;\&quot;);&quot;
+    			+ &quot;station.withdraw();&quot;
+    			+ &quot;this.takeHandlingFee();}&quot;
+    			);
+    	cc.addMethod(withdraw);
+    	
+    	//获取动态生成的class
+    	Class c = cc.toClass();
+    	//获取构造器
+    	Constructor constructor= c.getConstructor(Station.class);
+    	//通过构造器实例化
+    	TicketService o = (TicketService)constructor.newInstance(new Station());
+    	o.inquire();
+    	
+    	cc.writeFile(&quot;D://test&quot;);
+    }
+    
+}
+</pre></blockquote>
+<br>
+<span style="font-size:12px">上述代码执行过后，会产生StationProxy的字节码，并且用生成字节码加载如内存创建对象，调用inquire()方法，会得到以下结果：</span>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140603144142046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDM0OTE2OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+</blockquote>
+<p><span style="font-size:12px">通过上面动态生成的代码，我们发现，<span style="color:#FF0000"><strong><u>其实现相当地麻烦在创造的过程中，含有太多的业务代码。我们使用上述创建Proxy代理类的方式的初衷是减少系统代码的冗杂度，但是上述做法却增加了在动态创建代理类过程中的复杂度：手动地创建了太多的业务代码，并且封装性也不够，完全不具有可拓展性和通用性。如果某个代理类的一些业务逻辑非常复杂，上述的动态创建代理的方式是非常不可取的！</u></strong></span></span></p>
+</blockquote>
+<h3 style="background-color:rgb(166,255,153)">InvocationHandler角色的由来<br>
+</h3>
+<blockquote>
+<p><span style="font-size:12px">仔细思考代理模式中的代理Proxy角色。Proxy角色在执行代理业务的时候，无非是在调用真正业务之前或者之后做一些“额外”业务。</span></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140603152131484?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDM0OTE2OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 有上图可以看出，代理类处理的逻辑很简单：在调用某个方法前及方法后做一些额外的业务。换一种思路就是：在触发（invoke）真实角色的方法之前或者之后做一些额外的业务。那么，为了构造出具有通用性和简单性的代理类，可以将所有的触发真实角色动作交给一个触发的管理器，让这个管理器统一地管理触发。这种管理器就是Invocation Handler。<br>
+</span></p>
+<p><span style="font-size:12px">动态代理模式的结构跟上面的静态代理模式稍微有所不同，多引入了一个InvocationHandler角色。</span></p>
+<p><span style="font-size:12px">先解释一下InvocationHandler的作用：</span></p>
+<blockquote>
+<p><span style="font-size:12px">在静态代理中，代理Proxy中的方法，都指定了调用了特定的realSubject中的对应的方法：</span></p>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px">在上面的静态代理模式下，Proxy所做的事情，无非是调用在不同的request时，调用触发realSubject对应的方法；更抽象点看，Proxy所作的事情；在Java中 方法（Method）也是作为一个对象来看待了，<br>
+</span></p>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px">动态代理工作的基本模式就是将自己的方法功能的实现交给 InvocationHandler角色，外界对Proxy角色中的每一个方法的调用，Proxy角色都会交给InvocationHandler来处理，而InvocationHandler则调用具体对象角色的方法。如下图所示：</span></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140515134257500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><span style="font-size:12px; color:#FF0000"><strong>在这种模式之中：代理Proxy 和RealSubject 应该实现相同的功能，这一点相当重要。（我这里说的功能，可以理解为某个类的public方法）</strong></span></p>
+<p><span style="font-size:12px">在面向对象的编程之中，如果我们想要约定Proxy 和RealSubject可以实现相同的功能，有两种方式：</span></p>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;<span style="color:#FF0000"> <strong>a.一个比较直观的方式，就是定义一个功能接口，然后让Proxy 和RealSubject来实现这个接口。</strong></span></span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;<span style="color:#FF0000"><strong> b.还有比较隐晦的方式，就是通过继承。</strong></span>因为如果Proxy 继承自RealSubject，这样Proxy则拥有了RealSubject的功能，Proxy还可以通过重写RealSubject中的方法，来实现多态。<br>
+</span></p>
+</blockquote>
+<p><strong><u><span style="font-size:12px">其中JDK中提供的创建动态代理的机制，是以a 这种思路设计的，而cglib 则是以b思路设计的。</span></u></strong></p>
+</blockquote>
+<h3 style="background-color:rgb(166,255,153)"><strong>JDK的动态代理创建机制</strong>----通过接口<br>
+</h3>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp; 比如现在想为RealSubject这个类创建一个动态代理对象，JDK主要会做以下工作：<br>
+</span></p>
+<blockquote>
+<p><span style="font-size:12px; color:#FF6600">&nbsp;&nbsp;&nbsp; 1. &nbsp; 获取 RealSubject上的所有接口列表；<br>
+&nbsp;&nbsp;&nbsp; 2.&nbsp;&nbsp; 确定要生成的代理类的类名，默认为：com.sun.proxy.$ProxyXXXX ；<br>
+</span></p>
+<p><span style="font-size:12px; color:#FF6600">&nbsp;&nbsp;&nbsp; 3.&nbsp;&nbsp; 根据需要实现的接口信息，在代码中动态创建 该Proxy类的字节码；</span></p>
+<p><span style="font-size:12px; color:#FF6600">&nbsp;&nbsp;&nbsp; 4 .&nbsp; 将对应的字节码转换为对应的class 对象；</span></p>
+<p><span style="font-size:12px; color:#FF6600">&nbsp;&nbsp;&nbsp; 5.&nbsp;&nbsp; 创建InvocationHandler 实例handler，用来处理Proxy所有方法调用；</span></p>
+<p><span style="font-size:12px; color:#FF6600">&nbsp;&nbsp;&nbsp; 6.&nbsp;&nbsp; Proxy 的class对象 以创建的handler对象为参数，实例化一个proxy对象</span></p>
+</blockquote>
+<p><span style="font-size:12px"><br>
+</span></p>
+<p><span style="font-size:12px">JDK通过 java.lang.reflect.Proxy包来支持动态代理，一般情况下，我们使用下面的newProxyInstance方法</span>
+<table summary="" border="1" cellpadding="3" cellspacing="0" height="44" width="798">
+<tbody>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><span style="font-size:12px"><span size="-1" style=""><code>static&nbsp;<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/Object.html">Object</a></code></span></span></td>
+<td><span style="font-size:12px"><code><strong><a target="_blank" target="_blank" href="../../../java/lang/reflect/Proxy.html#newProxyInstance(java.lang.ClassLoader, java.lang.Class[], java.lang.reflect.InvocationHandler)">newProxyInstance</a></strong>(<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/ClassLoader.html">ClassLoader</a>&nbsp;loader,<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/Class.html">Class</a>&lt;?&gt;[]&nbsp;interfaces,<a target="_blank" target="_blank" title="java.lang.reflect 中的接口" href="../../../java/lang/reflect/InvocationHandler.html">InvocationHandler</a>&nbsp;h)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回一个指定接口的代理类实例，该接口可以将方法调用指派到指定的调用处理程序。</span></td>
+</tr>
+</tbody>
+</table>
+<span style="font-size:12px">而对于InvocationHandler，我们需要实现下列的invoke方法：</span></p>
+<p><span style="font-size:12px">在调用代理对象中的每一个方法时，在代码内部，都是直接调用了InvocationHandler 的invoke方法，而invoke方法根据代理类传递给自己的method参数来区分是什么方法。<br>
+</span></p>
+<p>
+<table summary="" border="1" cellpadding="3" cellspacing="0" height="44" width="796">
+<tbody>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><span style="font-size:12px"><span size="-1" style=""><code>&nbsp;<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/Object.html">Object</a></code></span></span></td>
+<td><span style="font-size:12px"><code><strong><a target="_blank" target="_blank" href="../../../java/lang/reflect/InvocationHandler.html#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])">invoke</a></strong>(<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/Object.html">Object</a>&nbsp;proxy,<a target="_blank" target="_blank" title="java.lang.reflect 中的类" href="../../../java/lang/reflect/Method.html">Method</a>&nbsp;method,<a target="_blank" target="_blank" title="java.lang 中的类" href="../../../java/lang/Object.html">Object</a>[]&nbsp;args)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在代理实例上处理方法调用并返回结果。</span></td>
+</tr>
+</tbody>
+</table>
+<span style="font-size:12px"><br>
+</span></p>
+<p><span style="font-size:12px">讲的有点抽象，下面通过一个实例来演示一下吧：</span></p>
+</blockquote>
+<blockquote>
+<h4 style="background-color:rgb(153,204,255)">JDK动态代理示例</h4>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp; 现在定义两个接口Vehicle和Rechargable，Vehicle表示交通工具类，有drive()方法；Rechargable接口表示可充电的（工具），有recharge() 方法；</span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp; 定义一个实现两个接口的类ElectricCar，类图如下：</span></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="http://img.blog.csdn.net/20140515132657750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><span style="font-size:12px">通过下面的代码片段，来为ElectricCar创建动态代理类：</span><br>
+</p>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_11_8695505"  code_snippet_id="374446" snippet_file_name="blog_20140603_11_8695505" name="code" class="java">package com.foo.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		ElectricCar car = new ElectricCar();
+		// 1.获取对应的ClassLoader
+		ClassLoader classLoader = car.getClass().getClassLoader();
+
+		// 2.获取ElectricCar 所实现的所有接口
+		Class[] interfaces = car.getClass().getInterfaces();
+		// 3.设置一个来自代理传过来的方法调用请求处理器，处理所有的代理对象上的方法调用
+		InvocationHandler handler = new InvocationHandlerImpl(car);
+		/*
+		  4.根据上面提供的信息，创建代理对象 在这个过程中， 
+                         a.JDK会通过根据传入的参数信息动态地在内存中创建和.class 文件等同的字节码
+		         b.然后根据相应的字节码转换成对应的class， 
+                         c.然后调用newInstance()创建实例
+		 */
+		Object o = Proxy.newProxyInstance(classLoader, interfaces, handler);
+		Vehicle vehicle = (Vehicle) o;
+		vehicle.drive();
+		Rechargable rechargeable = (Rechargable) o;
+		rechargeable.recharge();
+	}
+}
+</pre><pre code_snippet_id="374446" snippet_file_name="blog_20140603_12_1410722"  code_snippet_id="374446" snippet_file_name="blog_20140603_12_1410722" name="code" class="java">package com.foo.proxy;
+/**
+ * 交通工具接口
+ * @author louluan
+ */
+public interface Vehicle {
+	public void drive();
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_13_1061274"  code_snippet_id="374446" snippet_file_name="blog_20140603_13_1061274" name="code" class="java">package com.foo.proxy;
+/**
+ * 可充电设备接口
+ * @author louluan
+ */
+public interface Rechargable {
+
+	public void recharge();
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_14_1475978"  code_snippet_id="374446" snippet_file_name="blog_20140603_14_1475978" name="code" class="java">package com.foo.proxy;
+/**
+ * 电能车类，实现Rechargable，Vehicle接口
+ * @author louluan
+ */
+public class ElectricCar implements Rechargable, Vehicle {
+
+	@Override
+	public void drive() {
+		System.out.println(&quot;Electric Car is Moving silently...&quot;);
+	}
+
+	@Override
+	public void recharge() {
+		System.out.println(&quot;Electric Car is Recharging...&quot;);
+	}
+
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_15_7222836"  code_snippet_id="374446" snippet_file_name="blog_20140603_15_7222836" name="code" class="java">package com.foo.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+
+public class InvocationHandlerImpl implements InvocationHandler {
+
+	private ElectricCar car;
+	
+	public InvocationHandlerImpl(ElectricCar car)
+	{
+		this.car=car;
+	}
+	
+	@Override
+	public Object invoke(Object paramObject, Method paramMethod,
+			Object[] paramArrayOfObject) throws Throwable {
+		System.out.println(&quot;You are going to invoke &quot;+paramMethod.getName()+&quot; ...&quot;);
+		paramMethod.invoke(car, null);
+		System.out.println(paramMethod.getName()+&quot; invocation Has Been finished...&quot;);
+		return null;
+	}
+
+}
+</pre>来看一下代码执行后的结果：<br>
+<img src="http://img.blog.csdn.net/20140515145242546?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+</blockquote>
+</blockquote>
+<p></p>
+<blockquote>
+<h4 style="background-color:rgb(153,204,255)"><span style="font-size:12px"><strong>&nbsp;生成动态代理类的字节码并且保存到硬盘中：</strong>&nbsp;
+<br>
+</span></h4>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><span style="font-size:12px">JDK提供了<span style="color:#FF0000"><strong>sun.misc.ProxyGenerator.generateProxyClass(String proxyName,class[] interfaces)</strong></span> 底层方法来产生动态代理类的字节码：<br>
+</span></p>
+<p><span style="font-size:12px">下面定义了一个工具类，用来将生成的动态代理类保存到硬盘中：</span></p>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_16_2413287"  code_snippet_id="374446" snippet_file_name="blog_20140603_16_2413287" name="code" class="java">package com.foo.proxy;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Proxy;
+import sun.misc.ProxyGenerator;
+
+public class ProxyUtils {
+
+	/*
+	 * 将根据类信息 动态生成的二进制字节码保存到硬盘中，
+	 * 默认的是clazz目录下
+         * params :clazz 需要生成动态代理类的类
+         * proxyName : 为动态生成的代理类的名称
+        &#160;*/
+	public static void generateClassFile(Class clazz,String proxyName)
+	{
+		//根据类信息和提供的代理类名称，生成字节码
+                byte[] classFile = ProxyGenerator.generateProxyClass(proxyName, clazz.getInterfaces()); 
+		String paths = clazz.getResource(&quot;.&quot;).getPath();
+		System.out.println(paths);
+		FileOutputStream out = null;  
+        
+        try {
+            //保留到硬盘中
+           &#160;out = new FileOutputStream(paths+proxyName+&quot;.class&quot;);  
+            out.write(classFile);  
+            out.flush();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } finally {  
+            try {  
+                out.close();  
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            }  
+        }  
+	}
+	
+}
+</pre><span style="font-size:12px">现在我们想将生成的代理类起名为“ElectricCarProxy”，并保存在硬盘，应该使用以下语句：</span><pre code_snippet_id="374446" snippet_file_name="blog_20140603_17_8127125"  code_snippet_id="374446" snippet_file_name="blog_20140603_17_8127125" name="code" class="java">ProxyUtils.generateClassFile(car.getClass(), &quot;ElectricCarProxy&quot;);</pre><span style="font-size:12px">这样将在ElectricCar.class 同级目录下产生 ElectricCarProxy.class文件。用反编译工具如jd-gui.exe 打开，将会看到以下信息：</span><pre code_snippet_id="374446" snippet_file_name="blog_20140603_18_7810697"  code_snippet_id="374446" snippet_file_name="blog_20140603_18_7810697" name="code" class="java">import com.foo.proxy.Rechargable;
+import com.foo.proxy.Vehicle;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.UndeclaredThrowableException;
+/**
+ 生成的动态代理类的组织模式是继承Proxy类，然后实现需要实现代理的类上的所有接口，而在实现的过程中，则是通过将所有的方法都交给了InvocationHandler来处理
+*/
+ public final class ElectricCarProxy extends Proxy
+  implements Rechargable, Vehicle
+{
+  private static Method m1;
+  private static Method m3;
+  private static Method m4;
+  private static Method m0;
+  private static Method m2;
+
+  public ElectricCarProxy(InvocationHandler paramInvocationHandler)
+    throws 
+  {
+    super(paramInvocationHandler);
+  }
+
+  public final boolean equals(Object paramObject)
+    throws 
+  {
+    try
+    { // 方法功能实现交给InvocationHandler处理
+      return ((Boolean)this.h.invoke(this, m1, new Object[] { paramObject })).booleanValue();
+    }
+    catch (Error|RuntimeException localError)
+    {
+      throw localError;
+    }
+    catch (Throwable localThrowable)
+    {
+      throw new UndeclaredThrowableException(localThrowable);
+    }
+  }
+
+  public final void recharge()
+    throws 
+  {
+    try
+    {
+
+       // 方法功能实现交给InvocationHandler处理
+
+      this.h.invoke(this, m3, null);
+      return;
+    }
+    catch (Error|RuntimeException localError)
+    {
+      throw localError;
+    }
+    catch (Throwable localThrowable)
+    {
+      throw new UndeclaredThrowableException(localThrowable);
+    }
+  }
+
+  public final void drive()
+    throws 
+  {
+    try
+    {
+
+       // 方法功能实现交给InvocationHandler处理
+
+      this.h.invoke(this, m4, null);
+      return;
+    }
+    catch (Error|RuntimeException localError)
+    {
+      throw localError;
+    }
+    catch (Throwable localThrowable)
+    {
+      throw new UndeclaredThrowableException(localThrowable);
+    }
+  }
+
+  public final int hashCode()
+    throws 
+  {
+    try
+    {
+
+       // 方法功能实现交给InvocationHandler处理
+
+       return ((Integer)this.h.invoke(this, m0, null)).intValue();
+    }
+    catch (Error|RuntimeException localError)
+    {
+      throw localError;
+    }
+    catch (Throwable localThrowable)
+    {
+      throw new UndeclaredThrowableException(localThrowable);
+    }
+  }
+
+  public final String toString()
+    throws 
+  {
+    try
+    {
+
+       // 方法功能实现交给InvocationHandler处理
+      return (String)this.h.invoke(this, m2, null);
+    }
+    catch (Error|RuntimeException localError)
+    {
+      throw localError;
+    }
+    catch (Throwable localThrowable)
+    {
+      throw new UndeclaredThrowableException(localThrowable);
+    }
+  }
+
+  static
+  {
+    try
+    {  //为每一个需要方法对象，当调用相应的方法时，分别将方法对象作为参数传递给InvocationHandler处理
+      m1 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;equals&quot;, new Class[] { Class.forName(&quot;java.lang.Object&quot;) });
+      m3 = Class.forName(&quot;com.foo.proxy.Rechargable&quot;).getMethod(&quot;recharge&quot;, new Class[0]);
+      m4 = Class.forName(&quot;com.foo.proxy.Vehicle&quot;).getMethod(&quot;drive&quot;, new Class[0]);
+      m0 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;hashCode&quot;, new Class[0]);
+      m2 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;toString&quot;, new Class[0]);
+      return;
+    }
+    catch (NoSuchMethodException localNoSuchMethodException)
+    {
+      throw new NoSuchMethodError(localNoSuchMethodException.getMessage());
+    }
+    catch (ClassNotFoundException localClassNotFoundException)
+    {
+      throw new NoClassDefFoundError(localClassNotFoundException.getMessage());
+    }
+  }
+}</pre></blockquote>
+</blockquote>
+<br>
+<br>
+<blockquote>
+<blockquote><span style="font-size:12px"><strong>仔细观察可以看出生成的动态代理类有以下特点:</strong></span>
+<p><span style="font-size:12px; color:#FF0000"><strong>1.继承自 java.lang.reflect.Proxy，实现了 Rechargable,Vehicle 这两个ElectricCar实现的接口；</strong></span></p>
+<p><span style="font-size:12px; color:#FF0000"><strong>2.类中的所有方法都是final 的；</strong></span></p>
+<p><span style="font-size:12px; color:#FF0000"><strong>3.所有的方法功能的实现都统一调用了InvocationHandler的invoke()方法。</strong></span></p>
+<p><img src="http://img.blog.csdn.net/20140515134924015?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><br>
+</p>
+</blockquote>
+</blockquote>
+<p><br>
+</p>
+<h3 style="background-color:rgb(166,255,153)">cglib 生成动态代理类的机制----通过类继承：</h3>
+<blockquote>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JDK中提供的生成动态代理类的机制有个鲜明的特点是： 某个类必须有实现的接口，而生成的代理类也只能代理某个类接口定义的方法，比如：如果上面例子的ElectricCar实现了继承自两个接口的方法外，另外实现了方法bee() ,则在产生的动态代理类中不会有这个方法了！更极端的情况是：如果某个类没有实现接口，那么这个类就不能同JDK产生动态代理了！</span></p>
+<p><span style="font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 幸好我们有cglib。“CGLIB（Code Generation Library），是一个强大的，高性能，高质量的Code生成类库，它可以在运行期扩展Java类与实现Java接口。”<br>
+</span></p>
+<p><span style="font-size:12px">cglib 创建某个类A的动态代理类的模式是：</span></p>
+<blockquote>
+<p><span style="font-size:12px; color:#FF6600">1.&nbsp;&nbsp; 查找A上的所有非final 的public类型的方法定义；</span></p>
+<p><span style="font-size:12px; color:#FF6600">2.&nbsp;&nbsp; 将这些方法的定义转换成字节码；<br>
+</span></p>
+<p><span style="font-size:12px; color:#FF6600">3.&nbsp;&nbsp; 将组成的字节码转换成相应的代理的class对象；</span></p>
+<p><span style="font-size:12px; color:#FF6600">4.&nbsp;&nbsp; 实现 MethodInterceptor接口，用来处理 对代理类上所有方法的请求（这个接口和JDK动态代理InvocationHandler的功能和角色是一样的）</span></p>
+</blockquote>
+<p><span style="font-size:12px">一个有趣的例子：定义一个Programmer类，一个Hacker类</span></p>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_19_525913"  code_snippet_id="374446" snippet_file_name="blog_20140603_19_525913" name="code" class="java">package samples;
+/**
+ * 程序猿类
+ * @author louluan
+ */
+public class Programmer {
+
+	public void code()
+	{
+		System.out.println(&quot;I&#39;m a Programmer,Just Coding.....&quot;);
+	}
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_20_9860821"  code_snippet_id="374446" snippet_file_name="blog_20140603_20_9860821" name="code" class="java">package samples;
+
+import java.lang.reflect.Method;
+
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+/*
+ * 实现了方法拦截器接口
+ */
+public class Hacker implements MethodInterceptor {
+	@Override
+	public Object intercept(Object obj, Method method, Object[] args,
+			MethodProxy proxy) throws Throwable {
+		System.out.println(&quot;**** I am a hacker,Let&#39;s see what the poor programmer is doing Now...&quot;);
+		proxy.invokeSuper(obj, args);
+		System.out.println(&quot;****  Oh,what a poor programmer.....&quot;);
+		return null;
+	}
+
+}
+</pre><br>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_21_8672341"  code_snippet_id="374446" snippet_file_name="blog_20140603_21_8672341" name="code" class="java">package samples;
+
+import net.sf.cglib.proxy.Enhancer;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Programmer progammer = new Programmer();
+		
+		Hacker hacker = new Hacker();
+		//cglib 中加强器，用来创建动态代理
+		Enhancer enhancer = new Enhancer();  
+                 //设置要创建动态代理的类
+		enhancer.setSuperclass(progammer.getClass());  
+               // 设置回调，这里相当于是对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实行intercept()方法进行拦截
+                enhancer.setCallback(hacker);
+                Programmer proxy =(Programmer)enhancer.create();
+                proxy.code();
+        
+	}
+}
+</pre>程序执行结果：<br>
+<img src="http://img.blog.csdn.net/20140516000729781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHVhbmxvdWlz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>
+<p>让我们看看通过cglib生成的class文件内容：</p>
+<pre code_snippet_id="374446" snippet_file_name="blog_20140603_22_8322894"  code_snippet_id="374446" snippet_file_name="blog_20140603_22_8322894" name="code" class="java">package samples;
+
+import java.lang.reflect.Method;
+import net.sf.cglib.core.ReflectUtils;
+import net.sf.cglib.core.Signature;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.Factory;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
+public class Programmer$$EnhancerByCGLIB$$fa7aa2cd extends Programmer
+  implements Factory
+{
+   //......省略
+  private MethodInterceptor CGLIB$CALLBACK_0;  // Enchaner传入的methodInterceptor
+   // ....省略
+  public final void code()
+  {
+    MethodInterceptor tmp4_1 = this.CGLIB$CALLBACK_0;
+    if (tmp4_1 == null)
+    {
+      tmp4_1;
+      CGLIB$BIND_CALLBACKS(this);//若callback 不为空，则调用methodInterceptor 的intercept()方法
+    }
+    if (this.CGLIB$CALLBACK_0 != null)
+      return;
+      //如果没有设置callback回调函数，则默认执行父类的方法
+     &#160;super.code();
+  }
+   //....后续省略
+}</pre><br>
+</blockquote>
+<br>
+<p></p>
+<br>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css" />
+
+    
+<!--172.16.140.13-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+ 
+
+        <div id="digg" ArticleId="24589193" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>18</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/luanlouis/article/details/24009177';">上一篇</span><a href="/luanlouis/article/details/24009177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">JavaScript 事件委托 以及jQuery对事件委托的支持</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/luanlouis/article/details/26699735';">下一篇</span><a href="/luanlouis/article/details/26699735" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">mybatis关联查询问题(一对多、多对一)</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+        <div class="similar_article"  style="display:none">
+                <h4>我的同类文章</h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                                <label class="similar_cur">
+                                    <span  style="cursor:pointer"  onclick="GetCategoryArticles('1855931','u010349169','foot','24589193');">Java fundamentals<em>（8）</em></span>
+                                </label>
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_141"  style="max-height:195px;">
+                        <a href="http://blog.csdn.net" style="display:none">http://blog.csdn.net</a>
+                        <ul class="similar_list fl">                          
+                        </ul>
+
+                        <ul class="similar_list fr">                           
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+    <script  type="text/javascript">
+        $(function () {
+            GetCategoryArticles('1855931', 'u010349169','foot','24589193');
+        });
+    </script>
+      
+</div>
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/u010349169/svc/GetSuggestContent/24589193",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ <link rel="stylesheet" href="http://static.blog.csdn.net/css/replace.css"/>
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl" id="res-relatived" > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+        <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+            csdn.position.showEdu({
+                sourceType: "blog",
+                searchType: "detail",
+                searchKey: "24589193",
+                username: "",
+                recordcount: "5",
+                containerId: "adCollege" //容器DIV的id。 
+            });
+        </script> 
+    </div>  
+
+    
+     <div id="res"  data-mod="popu_36"  class="tracking-ad" style="width: 42%;float: left;margin-right: 30px;"></div>
+   
+</dl>
+
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = 'Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 5,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+            });
+        }, 500);
+    });    
+
+ </script>  
+
+    <div id="ad_cen">        
+<!-- 广告位开始 -->
+<ins data-revive-zoneid="71" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<!-- 广告位结束 -->    </div>  
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '24589193';
+    var commentscount = 14;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  language="javascript" type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/u010349169/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+</script>
+ <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>      
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/u010349169" target="_blank">
+    <img src="http://avatar.csdn.net/F/E/2/1_u010349169.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/u010349169" class="user_name" target="_blank">u010349169</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=u010349169','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                         <div class="ico_expert" title="CSDN博客准专家"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" style=" cursor:pointer;width:54px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhunzhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png" onmouseover="m_over_m(this,4)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>219757次</span></li>
+    <li>积分：<span>3286</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：3286 </div>
+        </span>  </li>
+    <li>排名：<span>第6880名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>49篇</span></li>
+    <li>转载：<span>2篇</span></li>
+    <li>译文：<span>15篇</span></li>
+    <li>评论：<span>251条</span></li>
+</ul>
+</ul>
+</div>
+
+
+
+
+<div id="custom_column_41469061" class="panel">
+<ul class="panel_head"><span>我的主页</span></ul>
+<ul class="panel_body">
+
+<div>
+<p style="color:red; font-family:'微软雅黑'">闷骚小少年自己搭了个主页，欢迎感兴趣的同学过来踩踩~ </p>
+<br>
+<a href="http://www.luanlouis.com" target="_blank">
+<div style="font-size:24px; font-family:'微软雅黑'">亦山的个人主页</div>
+</a><br>
+<p><a href="http://www.luanlouis.com" target="_blank"></a><a href="http://www.luanlouis.com" target="_blank"><img src="http://img.blog.csdn.net/20160512180751837">
+</a></p>
+</div>
+
+</ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/mybatis3-tutorials.html" target="_blank"><img src="http://img.blog.csdn.net/20160123192217177" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/mybatis3-tutorials.html" target="_blank">Java Persistence with MyBatis 3(中文版)</a>
+    <p>文章：7篇</p>
+    <span>阅读：26109</span>
+    </td>
+    </tr></table>
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/mybatis-principle.html" target="_blank"><img src="http://img.blog.csdn.net/20151123180109786" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/mybatis-principle.html" target="_blank">深入理解MyBatis原理</a>
+    <p>文章：8篇</p>
+    <span>阅读：52821</span>
+    </td>
+    </tr></table>
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jvm-principle.html" target="_blank"><img src="http://img.blog.csdn.net/20160403181610092" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jvm-principle.html" target="_blank">Java虚拟机原理图解</a>
+    <p>文章：10篇</p>
+    <span>阅读：53776</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/u010349169/article/category/1855931" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java fundamentals</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/1855933" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Design Patterns</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/1855935" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Javascript</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/1855937" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Dojo,jQuery</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/1856007" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Scrapes</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/1895605" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web Front</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2158459" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据库</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2206193" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jQuery</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2309433" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">MyBatis</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2363143" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">MyBatis教程</a><span>(12)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2363145" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">翻译</a><span>(15)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2383249" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Junit4</a><span>(8)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2620885" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JVM虚拟机原理</a><span>(10)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2630089" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JVM虚拟机原理图解</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2747371" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java基础要义</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2747373" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java基础</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/2820495" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">memcached</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/6070308" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">项目管理</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/u010349169/article/category/6176612" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring设计思想</a><span>(2)</span>
+                </li>
+</ul>
+</div><div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/luanlouis/article/details/41046443" title="《Java虚拟机原理图解》1.4 class文件中的字段表集合--field字段在class文件中是怎样组织的">《Java虚拟机原理图解》1.4 class文件中的字段表集合--field字段在class文件中是怎样组织的</a><span>(22496)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/43192131" title="Intellij IDEA 14中使用MyBatis-generator 自动生成MyBatis代码">Intellij IDEA 14中使用MyBatis-generator 自动生成MyBatis代码</a><span>(10972)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/24589193" title="Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a><span>(9985)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/37671851" title="《深入理解mybatis原理》 Mybatis数据源与连接池">《深入理解mybatis原理》 Mybatis数据源与连接池</a><span>(9183)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/35780175" title="Java Persistence with MyBatis 3(中文版) 第四章 使用注解配置SQL映射器">Java Persistence with MyBatis 3(中文版) 第四章 使用注解配置SQL映射器</a><span>(8230)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41408341" title="《深入理解mybatis原理》 MyBatis的二级缓存的设计原理">《深入理解mybatis原理》 MyBatis的二级缓存的设计原理</a><span>(7769)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/40422941" title="《深入理解mybatis原理》  MyBatis的架构设计以及实例分析">《深入理解mybatis原理》  MyBatis的架构设计以及实例分析</a><span>(7645)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41280959" title="《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项">《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项</a><span>(7566)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/39892027" title="《Java虚拟机原理图解》 1.1、class文件基本组织结构">《Java虚拟机原理图解》 1.1、class文件基本组织结构</a><span>(6676)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/37992171" title="《深入理解mybatis原理》 MyBatis事务管理机制">《深入理解mybatis原理》 MyBatis事务管理机制</a><span>(6191)</span>
+</li>
+</ul>
+</div>
+<div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/u010349169/article/month/2016/04">2016年04月</a><span>(2)</span></li><li><a href="/u010349169/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/u010349169/article/month/2015/01">2015年01月</a><span>(3)</span></li><li><a href="/u010349169/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/u010349169/article/month/2014/11">2014年11月</a><span>(10)</span></li><li><a href="/u010349169/article/month/2014/10">2014年10月</a><span>(4)</span></li><li><a href="/u010349169/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/u010349169/article/month/2014/07">2014年07月</a><span>(12)</span></li><li><a href="/u010349169/article/month/2014/06">2014年06月</a><span>(12)</span></li><li><a href="/u010349169/article/month/2014/04">2014年04月</a><span>(3)</span></li><li><a href="/u010349169/article/month/2014/02">2014年02月</a><span>(10)</span></li><li><a href="/u010349169/article/month/2014/01">2014年01月</a><span>(5)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/luanlouis/article/details/41046443" title="《Java虚拟机原理图解》1.4 class文件中的字段表集合--field字段在class文件中是怎样组织的">《Java虚拟机原理图解》1.4 class文件中的字段表集合--field字段在class文件中是怎样组织的</a><span>(49)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/39892027" title="《Java虚拟机原理图解》 1.1、class文件基本组织结构">《Java虚拟机原理图解》 1.1、class文件基本组织结构</a><span>(24)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/40043991" title="《Java虚拟机原理图解》3、JVM运行时数据区">《Java虚拟机原理图解》3、JVM运行时数据区</a><span>(15)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/24589193" title="Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a><span>(14)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41408341" title="《深入理解mybatis原理》 MyBatis的二级缓存的设计原理">《深入理解mybatis原理》 MyBatis的二级缓存的设计原理</a><span>(14)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41113695" title="《Java虚拟机原理图解》1.5、 class文件中的方法表集合--method方法在class文件中是怎样组织的">《Java虚拟机原理图解》1.5、 class文件中的方法表集合--method方法在class文件中是怎样组织的</a><span>(13)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41280959" title="《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项">《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项</a><span>(13)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/41039269" title="《Java虚拟机原理图解》1.3、class文件中的访问标志、类索引、父类索引、接口索引集合">《Java虚拟机原理图解》1.3、class文件中的访问标志、类索引、父类索引、接口索引集合</a><span>(11)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/37671851" title="《深入理解mybatis原理》 Mybatis数据源与连接池">《深入理解mybatis原理》 Mybatis数据源与连接池</a><span>(10)</span>
+</li>
+<li>
+<a href="/luanlouis/article/details/39960815" title="《Java虚拟机原理图解》 1.2.2、Class文件中的常量池详解（上）">《Java虚拟机原理图解》 1.2.2、Class文件中的常量池详解（上）</a><span>(8)</span>
+</li>
+</ul>
+</div>
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/luanlouis/article/details/40043991#comments">《Java虚拟机原理图解》3、JVM运行时数据区</a>
+    <p style="margin:0px;"><a href="/dandanzmc" class="user_name">dandanzmc</a>:
+我想问下这都是您自己研究的吗？有没有这种类似jvm原理的教程供给我参考参考啊？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/41280959#comments">《深入理解mybatis原理》 MyBatis的一级缓存实现详解 及使用注意事项</a>
+    <p style="margin:0px;"><a href="/vbubble" class="user_name">vbubble</a>:
+同一个数据不同项目调用，假设项目1采用mybatis一级缓存，项目1执行查询SQL，例如查询数据id...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/41113695#comments">《Java虚拟机原理图解》1.5、 class文件中的方法表集合--method方法在class文件中是怎样组织的</a>
+    <p style="margin:0px;"><a href="/zhuxueluo" class="user_name">zhuxueluo</a>:
+NB，写的很清楚，尤其图解之后阅读起来更轻松
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/24589193#comments">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a>
+    <p style="margin:0px;"><a href="/poised" class="user_name">poised</a>:
+最后cglib生成的proxy生成class文件：ClassWriter cw = new Clas...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/50492163#comments">《Maven进阶》1.maven 项目生命周期与构建原理</a>
+    <p style="margin:0px;"><a href="/u014485912" class="user_name">u014485912</a>:
+强
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/50492163#comments">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a>
+    <p style="margin:0px;"><a href="/chenchaofuck1" class="user_name">chenchaofuck1</a>:
+楼主怎么查看动态生成的代理类的字节码的？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/50492163#comments">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a>
+    <p style="margin:0px;"><a href="/chenchaofuck1" class="user_name">chenchaofuck1</a>:
+厉害
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/50492163#comments">Java动态代理机制详解（JDK 和CGLIB，Javassist，ASM）</a>
+    <p style="margin:0px;"><a href="/pandajava" class="user_name">pandajava</a>:
+学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习学习
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/43017071#comments">[Java基础要义]HashMap、LinkedHashMap元素遍历机制探讨</a>
+    <p style="margin:0px;"><a href="/qq_25984015" class="user_name">qq_25984015</a>:
+不错
+    </p>
+    </li>
+    <li>
+   
+         <a href="/luanlouis/article/details/41800511#comments">如何细粒度地控制你的MyBatis二级缓存(mybatis-enhanced-cache插件实现)</a>
+    <p style="margin:0px;"><a href="/xiezhongweiwei" class="user_name">xiezhongweiwei</a>:
+我想请问下为什么CacheKeysPool中每一个cashkey对应一个set?
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+ </div>   
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1439112"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_code.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+</body>
+</html>   
+ 

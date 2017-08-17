@@ -1,0 +1,118 @@
+1.stop()会使线程戛然而止
+
+2.suspend()会发生死锁
+
+3.所以停止线程只有一种：run()方法结束，从而Thread结束
+
+4.开启多线程运行，运行代码通常是循环结构
+
+5.只要控制循环，就可以让run方法结束，也就是thread结束
+
+6.在下下面
+
+	用flag
+
+
+class StopThread implements Runnable{
+	private boolean flag = true;
+	public void run(){
+		while(flag){
+			System.out.println(Thread.currentThread().getName()+"...run");
+		}
+	}
+	public void changeFlag(){  //在主函数中可以在需要的条件下调用changeFlag方法
+		flag = false;
+	}
+}
+
+class StopThreadDemo
+{
+	public static void main(String[] args)
+	{
+		StopThread st = new StopThread();
+		
+		Thread t1 = new Thread(st);
+		Thread t2 = new Thread(st);
+
+		t1.start();
+		t2.start();
+
+		int num = 0;
+
+		while(true)
+		{
+			if(num++ == 60)
+			{
+				st.changeFlag();
+				break;
+			}
+			System.out.println(Thread.currentThread().getName + "..." + num);
+		}
+	}
+}
+
+6.控制循环也停不下的情况
+  当线程处于冻结状态，就不会读取到标记，线程无法结束
+  如果在调用Object类的wait或该类的join，sleep方法过程中受阻，其中断状态将被清除，还将受到一个InterruptedException
+  
+  【Interrupt()方法强制清除冻结状态，让其恢复到运行中来】
+  
+  【这时只需要在异常处理中改变flag即可】
+
+  当没有指定的方式让冻结的线程恢复到运行状态时，这时需要对冻结进行清除。
+  强制让线程恢复到运行状态中来，这样就可以操作标记让线程结束
+
+  Thread类提供该方法，interru（）；
+
+class StopThread implements Runnable
+{
+	private boolean flag = true;
+	public synchronized void run()
+	{
+		while(flag)
+		{
+			try
+			{
+				wait();		//使线程阻塞
+			}
+			catch(InterruptedException e) //用interrupt方法解除阻塞状态，使线程运行，并捕获异常
+			{
+				System.out.println(Thread.currentThread().getName()+"...exception");
+				flag = false； //使循环结束，从而结束run方法，结束线程
+			}
+			System.out.println(Thread.currentThread().getName()+"...run");
+		}
+	}
+	public void changeFlag()
+	{  //在主函数中可以在需要的条件下调用changeFlag方法
+		flag = false;
+	}
+}
+
+
+class StopThreadDemo
+{
+	public static void main(String[] args)
+	{
+		StopThread st = new StopThread();
+		
+		Thread t1 = new Thread(st);
+		Thread t2 = new Thread(st);
+
+		t1.start();
+		t2.start();
+
+		int num = 0;
+
+		while(true)
+		{
+			if(num++ == 60)
+			{
+				st.changeFlag();
+				break;
+			}
+			System.out.println(Thread.currentThread().getName + "..." + num);
+		}
+		System.out.println()
+	}
+}

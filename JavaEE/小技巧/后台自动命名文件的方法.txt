@@ -1,0 +1,11 @@
+		public static function getNewFileName( ext:String, external:String='', isFindFile:Boolean = true  ):String{
+			if( isFindFile ) return external+StringUtil.GetTimeString()+'.'+ext;
+			return external+StringUtil.GetTimeString();
+		}
+
+
+	简单来说就是，使用一个固定的前缀+时间字符串+后缀
+
+	这样有规律又不重复
+
+	使用随机数命名就没这么好了。

@@ -1,0 +1,12 @@
+Person per=new Person()
+
+new Person()的同时会给Person类构造一个无参的构造方法 ： public Person(){
+                                                  }
+
+
+
+
+构造方法名与类名相同 无返回值 
+在主函数不需要调用方法 就自动执行了 
+因为new Person（）就相当于调用了构造方法 
+只是我们在这里将其书写出来了

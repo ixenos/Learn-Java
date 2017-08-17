@@ -1,0 +1,11 @@
+alt+/ 快速补全 sysout main
+
+ctrl+/ 快速注释
+
+ctrl+shift+o 快速import
+
+ctrl+alt+下 快速复制
+
+ctrl按住点击关键字 查看源代码
+
+ctrl+F11 执行

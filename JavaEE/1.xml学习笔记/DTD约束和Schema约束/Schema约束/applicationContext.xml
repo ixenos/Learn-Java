@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--xmlns冒号后指对什么进行约束，后面双引号就是这个约束的别名，xsi是一个默认的什么，xsi:schemaLocation指定别名对应的schema文件xsd的地址-->
+<!--一共有三个名称空间，自定义了两个，系统定义一个（xsi）-->
+<!--默认的schema约束 名称空间-->
+	<!--对xsi的约束，必须有，而且s地址不用写，xml的schema约束必须要有xsi，这样才能使用xsi:标签，这里只用来指定xsd的地址-->
+				<!--context的约束-->
+		<!--xsi是schema约束文件xsd的地址，空格前是别名，空格后是地址-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    ">
+
+    <!-- 在Spring上下文中载入property文件信息 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 数据访问层配置 -->
+    <import resource="classpath:/dao.xml" />
+    <!-- 服务层配置 -->
+    <import resource="classpath:/service.xml" />
+
+    <!-- 自动扫描@Controller标注的类控制器类 -->
+	<context:component-scan base-package="com.toceansoft.web" />
+
+
+</beans>

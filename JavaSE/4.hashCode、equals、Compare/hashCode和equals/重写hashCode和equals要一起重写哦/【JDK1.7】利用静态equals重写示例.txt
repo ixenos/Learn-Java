@@ -1,0 +1,28 @@
+class Employee
+{
+	public boolean equals(Object otherObjects)
+	{
+		//引用判断 a quick test to see if the objects are identical
+		if(this == otherObject) return true;
+
+		//null判断 must return false if the explicit parameter is null
+		if(otherObject == null) return false;
+
+		//类型判断 if the classes don't match, they can't be equal
+		if(getClass() != otherObject.getClass()) retutn false;
+
+		//向下转型 now we know otherObject is a non-null Employee
+		Employee other = (Employee) otherObject;
+
+		//定制域判断equals的规则 test whether the fields have identical values
+		return name.equals(other.name) && salary == other.salary && hireday.equals(other.hireday) 
+	}
+}
+
+
+【为了防备name或hireDay可能为null的情况需要使用【JDK1.7】Objects.equals(Object obj1,Object obj2)方法】
+	如果两个参数都为null，将可以返回true；如果其中一个为null，则返回false；否则，如果都不为null，
+将调用obj1.equals(obj2)。
+
+所以利用Objects.equals，最后一句改写为
+		return Objects.equals(name,other.name) && salary == other.salary && Objects.equals				(hireDay,other.hireDay);

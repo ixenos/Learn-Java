@@ -1,0 +1,12 @@
+1.对iterator遍历的理解是对集合元素的逐一取出
+
+2.使用Collection类的iterator，可以方便地遍历Vector，ArrayList，LinkedList等集合元素，避免通过get方法遍历时，针对每一种对象单独进行编码。
+
+3.在List和Set对象中，iterator的next方法返回的值是不一样的。
+  因为List属于线性集合，元素是有序的，读取时按照数组的形式，一个接一个地读取，读取也是按照add的顺序添加的。
+  而Set属于非线性，元素无序，所以读取的元素与添加的顺序不一定一致。
+  对于HashSet（内部是链表数组），其实它返回的顺序是按【HashCode】的顺序。
+  如果迭代也有序，则可以用LinkedHashSet。
+
+4.Iterator接口被List的子类和Set的子类实现，所以iterator方法已实现。
+  public Iterator<E> iterator()的意思是iterator方法，返回值是Iterator接口类型，且是泛型E。

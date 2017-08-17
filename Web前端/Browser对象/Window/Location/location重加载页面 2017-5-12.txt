@@ -1,0 +1,22 @@
+
+一、
+在开发过程中想要在某个时机去刷新某个固定的页面，去更新该页面某些控件的属性，比如显示隐藏、是否可点击等。
+是用的主要是通过 刷新该页面，
+方法如下：
+   方法一：
+           在该页面中调用：　location.reload(); 
+   方法二：
+           在该页面调用：    locatiion.replace("NEW_URL");
+   方法三：
+           windows.location.href="NEW_URL";
+
+
+二、
+当然 也支持子页面刷新父页面的操作，但是子页面和父页面是通过HTML包含的关系，如果是通过JS在某个时机去加载固定的格式的页面，这种不能使用。
+    方法如下：
+     方法一：
+             windows.location.person.href="NEW_URL";
+     方法二：
+             windows.location.person.reload();
+     方法三：
+              windows.location.person.replace("NEW_URL");

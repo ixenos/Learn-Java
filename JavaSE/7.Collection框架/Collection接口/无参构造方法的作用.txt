@@ -1,0 +1,21 @@
+
+
+	给一个类定义了一个含参构造器之后，编译器就不会给类自动添加一个隐式的无参构造器了。
+	
+	而该类的子类又必须调用父类的无参构造器，所以编译会不通过。
+
+	因此，当该类需要被继承时，要添加一个无参构造方法。
+
+
+	eg.public course{
+                   private int age;
+                   private String name;
+		   public course(int i,String str){
+                         this.age=i;
+                         this.name=str；  
+                      }
+                   public course(){ };               //无参构造方法
+		}
+
+
+           public course extends course	

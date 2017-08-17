@@ -1,0 +1,23 @@
+StringBuffer类型不是String 要打印还是要转成String类型 用to.string()
+StringBuffer类型是操作类 要使用必须先实例化开辟空间
+
+eg.
+
+public class StringBufferDemo{
+ public static void main(String[] args){
+   StringBuffer str=new StringBuffer();
+   str.append("I'm Xenos");
+   System.out.println(str.toString());
+   tell(str);
+   System.out.println(str.toString());
+ }
+ public static void tell(StringBuffer k){    //声明tell函数为public static则tell变成静态方法 在全局数据区定义 可直接                                               引用，而不需要声明对象 实例化操作
+   k.append("!");  
+ }
+}
+
+/*
+*结果将输出：
+*I'm Xenos
+*I/m Xenos!
+*/

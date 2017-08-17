@@ -1,0 +1,25 @@
+static 除非必要的时候 不建议使用， 因为static是程序刚启动的时候 就加加载static进内存。
+这样就算你的业务代码没使用这个static对象，这个static对象也已经在内存里了。
+而且知道你程序退出，虚拟机才会销毁他，这意味着static是必须占用系统资源。
+什么时候用的话，这个根据上面那段话就很容易理解了。
+因为他是再程序刚启动的时候就加载进内存里了，
+那么就是说不管你程序执行到哪，或有没有实例化这个static对象所在类，你都可以调用到这个对象。
+
+代码写法：所在类名.static对象(或方法)
+例如：
+class a{
+public static String userName="admin";
+public a(){
+System.out.println("实例化a类");
+}
+}
+要在b类里使用这个 static 修饰的 userName 对象
+class b{
+public b(){
+System.out.println("实例化b类");
+a.userName = "admin123";
+System.out.println(a.userName);
+}
+}
+这样 调用和修改，执行b类后 打印结果 不会打印a类构造器的那句话。你想一下就应该能明白什么时候该应了。 
+提醒一下 static 一般定义一些公共的变量 或者 公共方法。

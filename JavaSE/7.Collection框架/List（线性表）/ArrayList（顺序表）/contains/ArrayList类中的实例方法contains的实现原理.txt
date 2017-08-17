@@ -1,0 +1,31 @@
+ArrayList类中的实例方法contains的实现原理
+
+public boolean contains(Object o){
+
+return indexOf(o) >= 0;
+
+}
+
+public int indexOf(Object o) {
+
+if (o == null) {	//国际惯例，先来一发null判断
+
+for (int i = 0; i < size; i++)
+
+if (elementData[i]==null)
+
+return i;	//从ArrayList底层数组中找有没有null元素，有则返回对应索引
+
+} else {	//以下是非null时对应index的遍历查找
+
+for (int i = 0; i < size; i++)
+
+if (o.equals(elementData[i]))
+
+return i;
+
+}
+
+return -1;	//表示找不到对应索引，反映到contains就是false
+
+}

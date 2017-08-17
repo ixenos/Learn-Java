@@ -1,0 +1,34 @@
+
+1.前端封装各单表数据，后端用对应的bean存数据，后端用单独的存表函数，前端分别调用后端各单独存表函数
+
+2.前端封装各单表数据，后端用对应的bean存数据，后端封装全部单bean到一个Map中，用一个函数统一处理Map中的所有元素，前端调用这个函数
+
+3.前端封装各单表数据后再封装成一个总的js对象，后端用一个函数统一处理Map中的所有元素，前端调用这个函数
+
+
+
+我们选3.因为Jackson框架可以处理嵌套类型，我想平台应该也写好了相应的处理函数，
+
+但是，我们怎么把我们要的类型注册到转换器呢？
+
+对应我们这个，应该就是转换成 Map<String, Object> 那么JavaType=(Map.class, String.class, Object.class)
+
+然后取出的时候，我们记住前台的顺序，进行相应的强制转换？
+
+但是这个Map只存放了大对象ChecklossVO
+
+难道，嵌套JavaType了？
+
+JavaType1=(Object.class, Check.class, CheckTask.class, ThirdParty.class...)
+
+JavaType=(Map.class, String.class, JavaType1)
+
+那么就是Map<String, Object<Check, CheckTask,...>>
+
+传入save的时候泛型协变
+
+但是CheckLossVO有getXXX
+
+所以应该吧Object.class换成CheckLossVO.class
+
+也就是说，在后台还要构造一个大对象

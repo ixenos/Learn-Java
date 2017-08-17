@@ -1,0 +1,20 @@
+
+	由于使用scriptlet将在页面中嵌入java代码，这增加了网页设计人员的学习成本，因此考虑使用简单的标记来运行Java方法，而不用把Java代码写在页面中 <%   %>
+
+	因此，EL表达式诞生了。
+
+	EL的用途是提供一种简单的方法来调用Java代码
+
+	这些代码大多不存在页面上，可能在一个普通的Java类中
+
+	现在的规范是不能再在JSP中编写方法代码，要把Java方法写在别的地方，再由EL来调用
+
+
+
+
+	禁用scriptlet脚本，要在DD中放一个<scripting-invalid>true</scripting-invalid>标签，放在jsp-config标签下
+	禁用EL表达式，可在DD中(<el-ignored>标签)，也可在JSP用page指令禁止
+
+
+
+	JSP脚本----->JSP标准动作----->EL表达式

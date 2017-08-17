@@ -1,0 +1,8 @@
+
+
+
+elementdata[size++] = e;
+
+此时e是elementdata[size]，而不是elementdata[size++]，
+
+这里是执行赋值e给elementdata[size]后，size自加1.

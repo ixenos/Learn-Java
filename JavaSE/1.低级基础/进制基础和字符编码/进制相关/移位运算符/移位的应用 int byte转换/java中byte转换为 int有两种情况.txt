@@ -1,0 +1,17 @@
+java中byte转换为 int有两种情况，
+
+一种是要求保持值不变，例如进行数值计算，可采用【强制类型转换】：int i = (int) aByte;
+【Q：int强制类型转换后不会补0，那么还算是int吗】
+【A：会补位的放心，而且负数补1】
+
+另一种是要求保持最低字节中各个位不变，3个高字节全部用0填充，例如进行编解码操作，
+则需要采用【位操作】：int i = b & 0xff;【这里b是byte类型，0xff是默认是int型】
+
+
+int InputStream.read()
+该函数返回一个int类型，范围从0至255，如果到达流末尾，返回-1。通过ByteArrayInputStream的源码可以看到是如何从byte转到int
+public synchronized int read() {
+return (pos < count) ? (buf[pos++] & 0xff) : -1;
+}
+
+注意，不是自动转的，需要强制做处理。

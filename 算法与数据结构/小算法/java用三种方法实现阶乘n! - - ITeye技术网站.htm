@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>java用三种方法实现阶乘n! -  - ITeye技术网站</title>
+    <meta name="description" content="  用三种方法来实现n!实现使用BigDecimal类,因为用int最多正确算到12!,用long最多正确算到20!.实现方法都比较简单，但是转换为BigDecimal实现后可能看起来有点莫名其妙。废话不多说,直接上代码:       第一种方法:从1开始，一直递增乘到n，从而实现n！     package Factorial;    import java.math.BigDecimal;  i ..." />
+    <meta name="keywords" content="java, 三种方法, 阶乘, factorial, n! java用三种方法实现阶乘n!" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1451979451" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1448702469" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1448702469" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1448702469" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">知识库</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">ly5633</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://ly5633.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://ly5633.iteye.com" class="p-author" target="_blank">ly5633</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/1219408">java用三种方法实现阶乘n!</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/185482">java学习笔记</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/java">java</a><a href="http://www.iteye.com/blogs/tag/%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95">三种方法</a><a href="http://www.iteye.com/blogs/tag/%E9%98%B6%E4%B9%98">阶乘</a><a href="http://www.iteye.com/blogs/tag/factorial">factorial</a><a href="http://www.iteye.com/blogs/tag/n!">n!</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <p>  用三种方法来实现n!实现使用BigDecimal类,因为用int最多正确算到12!,用long最多正确算到20!.实现方法都比较简单，但是转换为BigDecimal实现后可能看起来有点莫名其妙。废话不多说,直接上代码:</p>
+<p> </p>
+<p>  第一种方法:从1开始，一直递增乘到n，从而实现n！</p>
+<p> </p>
+<pre class="java" name="code"><span>package Factorial;
+
+import java.math.BigDecimal;
+import java.util.Scanner;
+public class Factorial1 {
+	public static BigDecimal factorial(int n){ 
+		BigDecimal result = new BigDecimal(1);
+		BigDecimal a;
+		for(int i = 2; i &lt;= n; i++){
+			a = new BigDecimal(i);//将i转换为BigDecimal类型
+			result = result.multiply(a);//不用result*a，因为BigDecimal类型没有定义*操作</span><span>
+		}
+		return result;
+	}
+	
+	public static void main(String[] arguments){
+		Scanner sc = new Scanner(System.in);
+		int a = sc.nextInt();//读取控制台输入的整数
+		System.out.println(a + "!=" + factorial(a));
+	}
+
+}
+</span></pre>
+<p> </p>
+<p>  第二种方法:从n开始，一直递减乘到2，从而实现n！</p>
+<p> </p>
+<p> </p>
+<pre class="java" name="code"><span>package Factorial;
+
+import java.math.BigDecimal;
+import java.util.Scanner;
+public class Factorial3 {
+	public static BigDecimal factorial(BigDecimal n){
+		BigDecimal bd1 = new BigDecimal(1);//BigDecimal类型的1
+		BigDecimal bd2 = new BigDecimal(2);//BigDecimal类型的2</span><span>
+		BigDecimal result = bd1;//结果集，初值取1
+		while(n.compareTo(bd1) &gt; 0){//参数大于1，进入循环
+			result = result.multiply(n.multiply(n.subtract(bd1)));//实现result*（n*（n-1））
+			n = n.subtract(bd2);//n-2后继续
+		}
+		return result;
+	}
+	public static void main(String[] arguments){
+		Scanner sc = new Scanner(System.in);
+		BigDecimal  n = sc.nextBigDecimal();
+		
+		System.out.print(n + "!=" + factorial(n));
+	}
+
+}
+</span></pre>
+ 
+<p> 第三种方法,用递归实现:f(n)=n*f(n-1),f(1)=1,递归相乘，从而实现n！</p>
+<p> </p>
+<p> </p>
+<pre class="java" name="code">package Factorial;
+
+import java.util.Scanner;
+import java.math.BigDecimal;
+public class Factorial2 {
+	public static BigDecimal factorial(BigDecimal n){
+		BigDecimal bd1 = new BigDecimal(1);//1
+		if(n.equals(new BigDecimal(1))){
+			return bd1;
+		}
+		else
+			return n.multiply(factorial(n.subtract(bd1)));//n*f(n-1)
+	}
+	public static void main(String[] arguments){
+		Scanner sc = new Scanner(System.in);
+		BigDecimal a = sc.nextBigDecimal();
+		BigDecimal result = factorial(a);	
+		System.out.println(a + "!=" +result);
+		
+	}
+
+}</pre>
+<p> </p>
+  </div>
+
+  
+
+  
+  
+  <IFRAME SRC="/iframe_ggbd/794" SCROLLING=no WIDTH=680 HEIGHT=90 FRAMEBORDER=0></IFRAME>
+  
+  <div id="bottoms" class="clearfix">
+    <div id="digg_bottom" class="clearfix"><div class='digged'><strong>1</strong> <br/>顶</div><div class='digged'><strong>2</strong> <br/>踩</div></div>
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/1222372" class="next" title="java中的单例（Singleton）模式">java中的单例（Singleton）模式</a>
+      |
+      <a href="/blog/1218724" class="pre" title="Java中的大数处理类BigInteger和BigDecimar浅析">Java中的大数处理类BigInteger和BigDecimar ...</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2011-10-28 00:50</li>
+      <li>浏览 17635</li>
+      <li><a href="#comments">评论(0)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/language">编程语言</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/1219408" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1219408;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'java用三种方法实现阶乘n!');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'java用三种方法实现阶乘n!');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://ly5633.iteye.com'><img alt="ly5633的博客" class="logo" src="http://www.iteye.com/images/user-logo.gif?1448702469" title="ly5633的博客: " width="" /></a></div>
+  <div id="blog_owner_name">ly5633</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 26469 次</li>
+              
+              
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://kw-laster.iteye.com' target='_blank'><img alt="kw_laster的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="kw_laster的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://kw-laster.iteye.com' target='_blank' title='kw_laster'>kw_laster</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://rickyit.iteye.com' target='_blank'><img alt="RickyIT的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="RickyIT的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://rickyit.iteye.com' target='_blank' title='RickyIT'>RickyIT</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://417631997.iteye.com' target='_blank'><img alt="Qiao丫头的博客" class="logo" src="http://www.iteye.com/upload/logo/user/1155765/8be3acd7-9a09-3f91-881b-3eb8cd550948-thumb.jpg?1457245097" title="Qiao丫头的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://417631997.iteye.com' target='_blank' title='Qiao丫头'>Qiao丫头</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://d-18.iteye.com' target='_blank'><img alt="D_18的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="D_18的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://d-18.iteye.com' target='_blank' title='D_18'>D_18</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (3)</a></li>
+                
+                  <li><a href="/category/185482">java学习笔记 (3)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (0)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (0)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2011-10">2011-10</a> (3)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://memoryisking.iteye.com' target='_blank' title='memoryisking'>memoryisking</a>： 
+                  文章写的不错，但是感觉BigInteger还是有很多内容没有写 ...<br />
+                  <a href="/blog/1218724#bc2366101">Java中的大数处理类BigInteger和BigDecimar浅析</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2016 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+<script src="http://csdnimg.cn/pubfooter/js/tracking.js?version=20130923164150" type="text/javascript"></script>
+
+    
+    
+  </body>
+</html>
