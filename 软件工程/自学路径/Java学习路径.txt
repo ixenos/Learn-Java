@@ -1,160 +1,160 @@
-ÏÂÃæ¸ø³öµÚ¶þ½ÚJAVA×ÔÑ§Â·ÏßÍ¼ ÖÐÖªÊ¶µãµÄÃ÷Ï¸£º
+ä¸‹é¢ç»™å‡ºç¬¬äºŒèŠ‚JAVAè‡ªå­¦è·¯çº¿å›¾ ä¸­çŸ¥è¯†ç‚¹çš„æ˜Žç»†ï¼š
 
-Ò»£ºJ2SE
-//ÃæÏò¶ÔÏó£­·â×°¡¢//¼Ì³Ð¡¢//¶àÌ¬ //ÄÚ´æµÄ·ÖÎö
+ä¸€ï¼šJ2SE
+//é¢å‘å¯¹è±¡ï¼å°è£…ã€//ç»§æ‰¿ã€//å¤šæ€ //å†…å­˜çš„åˆ†æž
 
-µÝ¹é ¼¯ºÏÀà¡¢·ºÐÍ¡¢×Ô¶¯´ò°üÓë½â°ü¡¢Annotation
+é€’å½’ é›†åˆç±»ã€æ³›åž‹ã€è‡ªåŠ¨æ‰“åŒ…ä¸Žè§£åŒ…ã€Annotation
 
-IO ¶àÏß³Ì¡¢Ïß³ÌÍ¬²½ 
+IO å¤šçº¿ç¨‹ã€çº¿ç¨‹åŒæ­¥ 
 
-TCP/UDP AWT¡¢ÊÂ¼þÄ£ÐÍ¡¢ÄäÃûÀà
+TCP/UDP AWTã€äº‹ä»¶æ¨¡åž‹ã€åŒ¿åç±»
 
-ÕýÔò±í´ïÊ½ ·´Éä»úÖÆ
-
-
-¶þ£ºÊý¾Ý¿â£¨Oracle»òÕßMySQL£©
-SQLÓï¾ä ¶à±íÁ¬½Ó£¬ÄÚÍâÁ¬½Ó£¬ ×Ó²éÑ¯µÈ
-
-¹ÜÀí±í¡¢ÊÓÍ¼¡¢Ë÷Òý¡¢ÐòÁÐ¡¢Ô¼ÊøµÈ Ê÷×´½á¹¹´æ´¢
-
-´æ´¢¹ý³Ì¡¢´¥·¢Æ÷ Êý¾Ý¿âÉè¼ÆÈý·¶Ê½¡¢
+æ­£åˆ™è¡¨è¾¾å¼ åå°„æœºåˆ¶
 
 
-Èý£ºJDBC
-JDBC»ù´¡ Á¬½Ó³Ø 
+äºŒï¼šæ•°æ®åº“ï¼ˆOracleæˆ–è€…MySQLï¼‰
+SQLè¯­å¥ å¤šè¡¨è¿žæŽ¥ï¼Œå†…å¤–è¿žæŽ¥ï¼Œ å­æŸ¥è¯¢ç­‰
 
-Ê÷×´½á¹¹´æ´¢ÓëÕ¹ÏÖ DataSource & RowSet {¿´ÓÐÊÓÆµ}
+ç®¡ç†è¡¨ã€è§†å›¾ã€ç´¢å¼•ã€åºåˆ—ã€çº¦æŸç­‰ æ ‘çŠ¶ç»“æž„å­˜å‚¨
 
-JDBCÁ¬½ÓOracle¼°MySQL
-
-
-ËÄ£ºHTML_CSS_JAVASCRIPT
-html¡¢css¡¢javascript»ù´¡Óï·¨ JavaScript FormÅÐ¶Ï 
-
-Dom±à³Ì»ù´¡£¨ÊÂ¼þ´¦ÀíµÈ£© JS³£ÓÃÐ§¹ûÈçTreeView¡¢ÏÂÀ­Áª¶¯µÈ
-
-JSÑ§Ï°·½·¨ JSµ÷ÊÔ·½·¨ 
-
-DreamWeaver³õ²½£¨½¨Á¢HTML¡¢Table¡¢Form¡¢CSS£©µÈ 
+å­˜å‚¨è¿‡ç¨‹ã€è§¦å‘å™¨ æ•°æ®åº“è®¾è®¡ä¸‰èŒƒå¼ã€
 
 
-Îå£ºServlet & JSP
-tomcat»ù´¡ servlet»ù´¡ 
+ä¸‰ï¼šJDBC
+JDBCåŸºç¡€ è¿žæŽ¥æ±  
 
-web.xmlÅäÖÃ»ù´¡ web applicationµÄ½á¹¹ 
+æ ‘çŠ¶ç»“æž„å­˜å‚¨ä¸Žå±•çŽ° DataSource & RowSet {çœ‹æœ‰è§†é¢‘}
 
-servletÉúÃüÖÜÆÚ request responseµÈ³£ÓÃ·½·¨ 
+JDBCè¿žæŽ¥OracleåŠMySQL
 
-ServletContextÀà HTTPÐ­Òé»ù´¡£¨GET POST£©
+
+å››ï¼šHTML_CSS_JAVASCRIPT
+htmlã€cssã€javascriptåŸºç¡€è¯­æ³• JavaScript Formåˆ¤æ–­ 
+
+Domç¼–ç¨‹åŸºç¡€ï¼ˆäº‹ä»¶å¤„ç†ç­‰ï¼‰ JSå¸¸ç”¨æ•ˆæžœå¦‚TreeViewã€ä¸‹æ‹‰è”åŠ¨ç­‰
+
+JSå­¦ä¹ æ–¹æ³• JSè°ƒè¯•æ–¹æ³• 
+
+DreamWeaveråˆæ­¥ï¼ˆå»ºç«‹HTMLã€Tableã€Formã€CSSï¼‰ç­‰ 
+
+
+äº”ï¼šServlet & JSP
+tomcatåŸºç¡€ servletåŸºç¡€ 
+
+web.xmlé…ç½®åŸºç¡€ web applicationçš„ç»“æž„ 
+
+servletç”Ÿå‘½å‘¨æœŸ request responseç­‰å¸¸ç”¨æ–¹æ³• 
+
+ServletContextç±» HTTPåè®®åŸºç¡€ï¼ˆGET POSTï¼‰
 
 Cookie Session Application 
 
-JSPµÄ¼¸ÖÖÓï·¨£¨°üÀ¨JSTLµÈ£©×¢ÒâÔÚÏîÄ¿ÖÐÁ·Ï°£¬²»Òª¾ÐÄàÓÚÓï·¨Ï¸½Ú¶ø¹ü²½²»Ç°¡£
+JSPçš„å‡ ç§è¯­æ³•ï¼ˆåŒ…æ‹¬JSTLç­‰ï¼‰æ³¨æ„åœ¨é¡¹ç›®ä¸­ç»ƒä¹ ï¼Œä¸è¦æ‹˜æ³¥äºŽè¯­æ³•ç»†èŠ‚è€Œè£¹æ­¥ä¸å‰ã€‚
 
  
-Áù£ºStruts
-¶à²ã¼Ü¹¹ÀíÂÛ Model 1 and Model 2 
+å…­ï¼šStruts
+å¤šå±‚æž¶æž„ç†è®º Model 1 and Model 2 
 
-Struts»ù±¾¸ÅÄî MVC
+StrutsåŸºæœ¬æ¦‚å¿µ MVC
 
-ActionÓëÒµÎñÂß¼­ÀàµÄ¹ØÏµ ÔÚStrutsÓëJSPÖ®¼ä´«µÝÊý¾Ý
+Actionä¸Žä¸šåŠ¡é€»è¾‘ç±»çš„å…³ç³» åœ¨Strutsä¸ŽJSPä¹‹é—´ä¼ é€’æ•°æ®
 
-Struts´¦ÀíÁ÷³Ì£¨¿ØÖÆÁ÷£© Struts TagLib£¨ÁË½â³£ÓÃµÄ£© 
+Strutså¤„ç†æµç¨‹ï¼ˆæŽ§åˆ¶æµï¼‰ Struts TagLibï¼ˆäº†è§£å¸¸ç”¨çš„ï¼‰ 
 
 JSTL ActionForm 
 
-×Ö¶ÎÊÕ¼¯ ÉÏ´«ÎÄ¼þ 
+å­—æ®µæ”¶é›† ä¸Šä¼ æ–‡ä»¶ 
 
-ÀàÐÍ×ª»» DTO 
+ç±»åž‹è½¬æ¢ DTO 
 
-¶¯Ì¬Action Form ÑéÖ¤¿ò¼Ü
+åŠ¨æ€Action Form éªŒè¯æ¡†æž¶
 
-ActionForward ×ª·¢ÓëÖØ¶¨Ïò ¶¯Ì¬Éú³ÉActionForward 
+ActionForward è½¬å‘ä¸Žé‡å®šå‘ åŠ¨æ€ç”ŸæˆActionForward 
 
-È«¾ÖÓë¾Ö²¿µÄActionForward Action Forward Scope
+å…¨å±€ä¸Žå±€éƒ¨çš„ActionForward Action Forward Scope
 
-UnknownActionMapping ActionµÄÏß³Ì°²È« 
+UnknownActionMapping Actionçš„çº¿ç¨‹å®‰å…¨ 
 
-I18N ÈçºÎÇÐ»»ÓïÑÔ»·¾³
+I18N å¦‚ä½•åˆ‡æ¢è¯­è¨€çŽ¯å¢ƒ
 
-StrutsÒì³£´¦Àí»úÖÆ ³ÌÐò´¦Àí ×Ô¶¯´¦Àí ×Ô¶¨ÒåÒì³£´¦ÀíÆ÷
+Strutså¼‚å¸¸å¤„ç†æœºåˆ¶ ç¨‹åºå¤„ç† è‡ªåŠ¨å¤„ç† è‡ªå®šä¹‰å¼‚å¸¸å¤„ç†å™¨
 
-StrutsµÄ¶àÄ£¿éÅäÖÃ 
-
-
-Æß£ºXML
-£¨XML/XSL¡¢XSLT/DTD¡¢SCHEMAµÈ»ù´¡µÄ¸ÅÄî¡¢¹ØÓÚJavaµÄ±à³Ì¿ÉÒÔÔÝÊ±ÈÓÔÚÒ»±ß£© 
+Strutsçš„å¤šæ¨¡å—é…ç½® 
 
 
-°Ë£ºHibernate
-OR MappingÔ­Àí 
+ä¸ƒï¼šXML
+ï¼ˆXML/XSLã€XSLT/DTDã€SCHEMAç­‰åŸºç¡€çš„æ¦‚å¿µã€å…³äºŽJavaçš„ç¼–ç¨‹å¯ä»¥æš‚æ—¶æ‰”åœ¨ä¸€è¾¹ï¼‰ 
 
-Hibernate»ù´¡¿ª·¢²½Öè 
 
-Hibernate»ù±¾½Ó¿Ú£¨ÖØµãSession£©
+å…«ï¼šHibernate
+OR MappingåŽŸç† 
 
-ÆÕÍ¨ÊôÐÔÓ³Éä 
+HibernateåŸºç¡€å¼€å‘æ­¥éª¤ 
 
-¹ØÁª¹ØÏµÓ³Éä 
+HibernateåŸºæœ¬æŽ¥å£ï¼ˆé‡ç‚¹Sessionï¼‰
+
+æ™®é€šå±žæ€§æ˜ å°„ 
+
+å…³è”å…³ç³»æ˜ å°„ 
 
 Native SQL 
 
 inverse lazy cascade 
 
-¼Ì³Ð¹ØÏµÓ³Éä 
+ç»§æ‰¿å…³ç³»æ˜ å°„ 
 
 HQL 
 
-ÐÔÄÜÓÅ»¯ Ò»¼¶»º´æ ¶þ¼¶»º´æ ²éÑ¯»º´æ
+æ€§èƒ½ä¼˜åŒ– ä¸€çº§ç¼“å­˜ äºŒçº§ç¼“å­˜ æŸ¥è¯¢ç¼“å­˜
 
-ÊÂÎñÓë²¢·¢ ±¯¹ÛËø¡¢ÀÖ¹ÛËø 
+äº‹åŠ¡ä¸Žå¹¶å‘ æ‚²è§‚é”ã€ä¹è§‚é” 
 
 OpenSessionInView 
 
 CurrentSession 
 
-£¨ÖÁÓÚJTA¡¢ÁªºÏÖ÷¼ü¡¢×ÔÈ»Ö÷¼ü¡¢¶¯Ì¬Ö÷¼ü¡¢AnyÀàÐÍ Creteria Queries Intercepter and Event ×Ô¶¨ÒåÀàÐÍµÈ£¬¿ÉÒÔÔÝÊ±ÈÓÔÚÒ»±ß£©
+ï¼ˆè‡³äºŽJTAã€è”åˆä¸»é”®ã€è‡ªç„¶ä¸»é”®ã€åŠ¨æ€ä¸»é”®ã€Anyç±»åž‹ Creteria Queries Intercepter and Event è‡ªå®šä¹‰ç±»åž‹ç­‰ï¼Œå¯ä»¥æš‚æ—¶æ‰”åœ¨ä¸€è¾¹ï¼‰
 
  
-¾Å£ºSpring
+ä¹ï¼šSpring
 IOC/DI 
 
-SpringÅäÖÃ
+Springé…ç½®
 
-Spring¼Ü¹¹ 
+Springæž¶æž„ 
 
-AOP¼°Spring AOP 
+AOPåŠSpring AOP 
 
-ÉùÃ÷Ê½ÊÂÎñ£¨AOP£©
+å£°æ˜Žå¼äº‹åŠ¡ï¼ˆAOPï¼‰
 
-Spring + Hibernate SpringÖ§³ÖWeb 
+Spring + Hibernate Springæ”¯æŒWeb 
 
 Scope 
 
-£¨ÆäËûµÄSpringÄ£¿é¶ÔÓÚ×ÔÑ§À´Ëµ¿ÉÒÔÔÝÊ±ÈÓÔÚÒ»±ß£© 
+ï¼ˆå…¶ä»–çš„Springæ¨¡å—å¯¹äºŽè‡ªå­¦æ¥è¯´å¯ä»¥æš‚æ—¶æ‰”åœ¨ä¸€è¾¹ï¼‰ 
 
 
-Ê®£ºEJB3.0
-J2EE¼Ü¹¹»ù´¡£¨JTA JMSµÈ£© 
+åï¼šEJB3.0
+J2EEæž¶æž„åŸºç¡€ï¼ˆJTA JMSç­‰ï¼‰ 
 
-EJB»ù´¡£¨µØÎ»¼°»ù±¾ÀíÂÛ¡¢·ÖÀàµÈ£©
+EJBåŸºç¡€ï¼ˆåœ°ä½åŠåŸºæœ¬ç†è®ºã€åˆ†ç±»ç­‰ï¼‰
 
 Annotation 
 
-Ant±àÒëÓë²¿ÊðEJB 
+Antç¼–è¯‘ä¸Žéƒ¨ç½²EJB 
 
 Session Bean 
 
-EJBµÄÒÀÀµ×¢Èë 
+EJBçš„ä¾èµ–æ³¨å…¥ 
 
 Persistence API 
 
-£¨¿ÉÒÔÓÃJBossÑ§Ï°EJB3.0£©
+ï¼ˆå¯ä»¥ç”¨JBosså­¦ä¹ EJB3.0ï¼‰
 
   
-Ê®Ò»:ÖÁÓÚSOA£¬¶ÔÓÚ×ÔÑ§µÄÍ¬Ñ§À´Ëµ£¬ÔÝÊ±²»ÓÃÌØ±ð¹Ø×¢¡£
+åä¸€:è‡³äºŽSOAï¼Œå¯¹äºŽè‡ªå­¦çš„åŒå­¦æ¥è¯´ï¼Œæš‚æ—¶ä¸ç”¨ç‰¹åˆ«å…³æ³¨ã€‚
 
-×÷Õß£ºZ Lee
-Á´½Ó£ºhttp://www.zhihu.com/question/19945685/answer/37686785
-À´Ô´£ºÖªºõ
-Öø×÷È¨¹é×÷ÕßËùÓÐ¡£ÉÌÒµ×ªÔØÇëÁªÏµ×÷Õß»ñµÃÊÚÈ¨£¬·ÇÉÌÒµ×ªÔØÇë×¢Ã÷³ö´¦¡£
+ä½œè€…ï¼šZ Lee
+é“¾æŽ¥ï¼šhttp://www.zhihu.com/question/19945685/answer/37686785
+æ¥æºï¼šçŸ¥ä¹Ž
+è‘—ä½œæƒå½’ä½œè€…æ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»ä½œè€…èŽ·å¾—æŽˆæƒï¼Œéžå•†ä¸šè½¬è½½è¯·æ³¨æ˜Žå‡ºå¤„ã€‚
