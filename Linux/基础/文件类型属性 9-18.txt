@@ -1,0 +1,35 @@
+
+
+    文件类型属性：用字符体现
+
+
+1.‘-’开头代表普通文件   Regular File
+    如：-rw-r--r--， 其中第一个-表示
+
+2.‘d’开头代表目录文件   Directory File
+
+3.‘l’开头代表链接文件   Link File
+
+4.‘b’开头代表块设备文件  Block File
+
+5.‘c’开头代表字符设备文件 Character File
+
+6.‘p’开头代表管道文件   Pipe File
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
