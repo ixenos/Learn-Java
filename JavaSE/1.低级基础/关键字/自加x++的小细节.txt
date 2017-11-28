@@ -3,6 +3,6 @@
 
 elementdata[size++] = e;
 
-´ËÊ±eÊÇelementdata[size]£¬¶ø²»ÊÇelementdata[size++]£¬
+æ­¤æ—¶eæ˜¯elementdata[size]ï¼Œè€Œä¸æ˜¯elementdata[size++]ï¼Œ
 
-ÕâÀïÊÇÖ´ĞĞ¸³Öµe¸øelementdata[size]ºó£¬size×Ô¼Ó1.
+è¿™é‡Œæ˜¯æ‰§è¡Œèµ‹å€¼eç»™elementdata[size]åï¼Œsizeè‡ªåŠ 1.

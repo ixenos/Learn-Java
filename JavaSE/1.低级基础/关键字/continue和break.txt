@@ -1,13 +1,13 @@
-continue;ÓÃÀ´ÌáÇ°½áÊø±¾´ÎÑ­»·£¬½øÈëÏÂÒ»´ÎÑ­»·£¬
-	Ö»ÄÜÓÃÔÚfor¡¢while¡¢do-whileÈý¸öÑ­»·Óï¾äÖÐ£¬ÓëifÌõ¼þÓï¾äÒ»ÆðÀ´¼ÓËÙÑ­»·
+continue;ç”¨æ¥æå‰ç»“æŸæœ¬æ¬¡å¾ªçŽ¯ï¼Œè¿›å…¥ä¸‹ä¸€æ¬¡å¾ªçŽ¯ï¼Œ
+	åªèƒ½ç”¨åœ¨forã€whileã€do-whileä¸‰ä¸ªå¾ªçŽ¯è¯­å¥ä¸­ï¼Œä¸Žifæ¡ä»¶è¯­å¥ä¸€èµ·æ¥åŠ é€Ÿå¾ªçŽ¯
 
-break£»ÓÃÀ´Ìø³öÑ­»·£¬ÌáÇ°ÖÕÖ¹Ñ­»·
-
-
-¶þÕßÖ»¶Ô°üº¬ËûÃÇµÄ×îÄÚ²ãÑ­»·ÌåÓï¾äÆð×÷ÓÃ£¬¶ÔÍâ²ãÑ­»·Óï¾ä²»Æð×÷ÓÃ
+breakï¼›ç”¨æ¥è·³å‡ºå¾ªçŽ¯ï¼Œæå‰ç»ˆæ­¢å¾ªçŽ¯
 
 
-Èç¹û³ÌÐòÏëÁ¢¼´½áÊøÖ´ÐÐ£¬ÄÇÃ´continueºÍbreak¾Í²»ÄÇÃ´ÊÊÓÃÁË£¬
-´ËÊ±¿ÉÓÃreturnÓï¾äÖ±½ÓÍË³öº¯Êý£¬
-»òÕßÊ¹ÓÃexitº¯ÊýÖÕÖ¹³ÌÐòÖ´ÐÐ£¨·µ»Ø0°µÊ¾Õý³£ÍË³ö£¬ÆäÓàÎª´íÎóÍË³ö£©
+äºŒè€…åªå¯¹åŒ…å«ä»–ä»¬çš„æœ€å†…å±‚å¾ªçŽ¯ä½“è¯­å¥èµ·ä½œç”¨ï¼Œå¯¹å¤–å±‚å¾ªçŽ¯è¯­å¥ä¸èµ·ä½œç”¨
+
+
+å¦‚æžœç¨‹åºæƒ³ç«‹å³ç»“æŸæ‰§è¡Œï¼Œé‚£ä¹ˆcontinueå’Œbreakå°±ä¸é‚£ä¹ˆé€‚ç”¨äº†ï¼Œ
+æ­¤æ—¶å¯ç”¨returnè¯­å¥ç›´æŽ¥é€€å‡ºå‡½æ•°ï¼Œ
+æˆ–è€…ä½¿ç”¨exitå‡½æ•°ç»ˆæ­¢ç¨‹åºæ‰§è¡Œï¼ˆè¿”å›ž0æš—ç¤ºæ­£å¸¸é€€å‡ºï¼Œå…¶ä½™ä¸ºé”™è¯¯é€€å‡ºï¼‰
 

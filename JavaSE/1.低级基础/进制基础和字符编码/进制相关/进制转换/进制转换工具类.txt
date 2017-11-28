@@ -2,27 +2,27 @@ public class Utilities {
 	public static byte[] int2Bytes(int num) {
 		byte[] byteNum = new byte[4];
 		for (int ix = 0; ix < 4; ++ix) {
-			int offset = 32 - (ix + 1) * 8;//´Ó¸ß°ËÎ»¿ªÊ¼È¡
-			byteNum[ix] = (byte) ((num >> offset) & 0xff);//È¡ÓÒÒÆºóµÄµÍ°ËÎ»
+			int offset = 32 - (ix + 1) * 8;//ä»é«˜å…«ä½å¼€å§‹å–
+			byteNum[ix] = (byte) ((num >> offset) & 0xff);//å–å³ç§»åçš„ä½å…«ä½
 		}
-		return byteNum;//ÓÃbyteÊı×é·Ö±ğ²Ø×Å4¸ö8Î»
+		return byteNum;//ç”¨byteæ•°ç»„åˆ†åˆ«è—ç€4ä¸ª8ä½
 	}
 
 	public static int bytes2Int(byte[] byteNum) {
 		int num = 0;
 		for (int ix = 0; ix < 4; ++ix) {
-			num <<= 8;//È¡Ò»´Î¾Í×óÒÆ°ËÎ»£¬°Ñ¸ßÎ»ÍÆÇ°
-			num |= (byteNum[ix] & 0xff);//»òµÈÓÃÀ´ÎüÊÕ1
+			num <<= 8;//å–ä¸€æ¬¡å°±å·¦ç§»å…«ä½ï¼ŒæŠŠé«˜ä½æ¨å‰
+			num |= (byteNum[ix] & 0xff);//æˆ–ç­‰ç”¨æ¥å¸æ”¶1
 		}
 		return num;
 	}
 
 	public static byte int2OneByte(int num) {
-		return (byte) (num & 0x000000ff); //Ö»È¡µÍ°ËÎ»
+		return (byte) (num & 0x000000ff); //åªå–ä½å…«ä½
 	}
 
 	public static int oneByte2Int(byte byteNum) { 
-    return byteNum > 0 ? byteNum : (128 + (128 + byteNum));//´óÓÚ0×Ô¶¯×ª»»£¬Ğ¡ÓÚ0²¹³äĞÅÑöÊ¹ÆäÎªĞ¡ÓÚ0µÄint£¬ÒòÎªÖ±½Ó×ª»»È±ÉÙ·ûºÅÎ» 
+    return byteNum > 0 ? byteNum : (128 + (128 + byteNum));//å¤§äº0è‡ªåŠ¨è½¬æ¢ï¼Œå°äº0è¡¥å……ä¿¡ä»°ä½¿å…¶ä¸ºå°äº0çš„intï¼Œå› ä¸ºç›´æ¥è½¬æ¢ç¼ºå°‘ç¬¦å·ä½ 
 }  
   
 public static byte[] long2Bytes(long num) {  //byte 1B short 2B int 4B long 8B float 4B double 8B char 2B boolean 
